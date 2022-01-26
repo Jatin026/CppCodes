@@ -1,0 +1,1 @@
+price-= (price>500 )? 0.1*price:0;

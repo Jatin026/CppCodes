@@ -1,0 +1,1 @@
+{"name":"Local: sumofcubes_binary","url":"d:\\Jatin\\C++ Codes\\Problems\\Maths\\sumofcubes_binary.cpp","tests":[{"id":1643117166152,"input":"7\n1\n2\n4\n34\n35\n16\n703657519796","output":"NO\nYES\nNO\nNO\nYES\nYES\nYES"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\Maths\\sumofcubes_binary.cpp","group":"local","local":true}

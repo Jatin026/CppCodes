@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "cmath": "cpp",
+        "iomanip": "cpp",
+        "complex": "cpp",
+        "cstdlib": "cpp",
+        "chrono": "cpp"
+    }
+}
