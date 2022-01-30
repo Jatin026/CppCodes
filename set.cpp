@@ -11,7 +11,7 @@ int main() {
     set<int> s;
     for (int i=0; i<q; i++) {
         int j;
-        int k;
+        int k;  
         cin>>j>>k; 
         if (j==1){
             s.insert(k);
