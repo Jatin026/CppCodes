@@ -1,10 +1,20 @@
 #include<bits/stdc++.h>
 using namespace std;
-bool check(string s){
-    string str=s;
-    reverse(str.begin(), str.end());
-    if(str==s) return 1;
-    return 0;
+vector<int> manacher_odd(string s) {
+    int n = s.size();
+    s = "$" + s + "^";
+    vector<int> p(n + 2);
+    int l = 0, r = -1;
+    for(int i = 1; i <= n; i++) {
+        p[i] = max(0, min(r - i, p[l + (r - i)]));
+        while(s[i - p[i]] == s[i + p[i]]) {
+            p[i]++;
+        }
+        if(i + p[i] > r) {
+            l = i - p[i], r = i + p[i];
+        }
+    }
+    return vector<int>(begin(p) + 1, end(p) - 1);
 }
 int main(){
     int t;
@@ -14,43 +24,16 @@ int main(){
         int n,count=0;
         cin>>n;
         string k="";
-        vector<string> v(n), ultav(n),ulta2(n),ulta3(n),s(n) ;
+        int v[n];
+        vector<int> l;
         for (int i = 0; i < n; i++)
         {
             cin>>v[i];
             k+=v[i];
-            if((v[i]).size()==2){
-                ulta2[i]=v[i];
-            }
-            else if((v[i]).size()==3){
-                ulta3[i]=v[i];
-            }
+             
         }
-        for (int i = 0; i < n-1; i++)
-        {
-            string k=(ulta2[i]+ulta2[i+1]).substr(0,3);
-            reverse(k.begin(), k.end());
-            s[i]=k;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            string str=v[i];
-            reverse(str.begin(), str.end());
-            ultav[i]=str;
-        }
-        sort(v.begin(),v.end());
-        sort(s.begin(),s.end());
-        sort(ultav.begin(),ultav.end());
-        sort(ulta3.begin(),ulta3.end());
-        // for (int i = 0; i < n; i++)
-        // {
-        //     if(s[i]==ulta3[i]) count++;
-        // }
-        for (int i = 0; i < n; i++)
-        {
-            if(v[i]==ultav[i]) count++;
-        }
-        if(count>0 || check(k)==1){
+        l=manacher_odd(k);
+        if(l.size()>0){
             cout<<"YES\n";
         }
         else{

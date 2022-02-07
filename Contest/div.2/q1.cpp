@@ -10,7 +10,7 @@ int main(){
         pair<int , int> p[n];
         for (int i = 0; i < n; i++)
         {
-            cin>>p[i].first;
+            cin>>p[i].first; 
         }
         for (int i = 0; i < n; i++)
         {

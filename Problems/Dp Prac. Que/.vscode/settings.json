@@ -5,6 +5,7 @@
         "iomanip": "cpp",
         "complex": "cpp",
         "cstdlib": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "ostream": "cpp"
     }
 }

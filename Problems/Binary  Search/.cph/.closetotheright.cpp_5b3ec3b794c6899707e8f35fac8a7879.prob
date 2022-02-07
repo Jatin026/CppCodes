@@ -1,0 +1,1 @@
+{"name":"Local: closetotheright","url":"d:\\Jatin\\C++ Codes\\Problems\\Binary  Search\\closetotheright.cpp","tests":[{"id":1643520044367,"input":"5 5\n3 3 5 8 9\n2 4 8 1 10","output":"1\n3\n4\n1\n6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\Binary  Search\\closetotheright.cpp","group":"local","local":true}
