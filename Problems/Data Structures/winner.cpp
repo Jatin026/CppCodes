@@ -8,20 +8,27 @@ using namespace std;
 void solve(){
     int n,max_v=INT_MIN;
     cin>>n;
-    map<string , int > m;
-    string ans;
+    int score[n];
+    map<string , int > m,p;
+    string s[n],ans;
     for (int i = 0; i < n ; i++)
     {
-        string s;
-        int k;
-        cin>>s>>k;
-        m[s]+=k;
-        if(m[s]>max_v){
-            ans=s;
-            max_v=m[s]; 
+        
+        cin>>s[i]>>score[i];
+        m[s[i]]+=score[i];
     }
+    for (int i = 0; i < n ; i++)
+    {
+        max_v=max(max_v,m[s[i]]);
     }
-    cout<<ans;
+    for (int i = 0; i < n; i++)
+    {
+        p[s[i]]+=score[i];
+        if(p[s[i]]>=max_v && m[s[i]]==max_v ){
+            cout<<s[i];
+            return;
+        }
+    }
 }
 int main(){
     FAST

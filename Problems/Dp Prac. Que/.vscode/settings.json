@@ -6,6 +6,9 @@
         "complex": "cpp",
         "cstdlib": "cpp",
         "chrono": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "vector": "cpp",
+        "stl_bvector.h": "c",
+        "array": "cpp"
     }
 }

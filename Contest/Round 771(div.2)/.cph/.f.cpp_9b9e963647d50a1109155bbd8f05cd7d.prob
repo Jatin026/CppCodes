@@ -1,0 +1,1 @@
+{"name":"Local: f","url":"d:\\Jatin\\C++ Codes\\Contest\\Round 771(div.2)\\f.cpp","tests":[{"id":1644899400961,"input":"3\n4\n1 1 2 2\n3\n1 2 3\n2\n0 0\n","output":"4\n3\n1\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\Round 771(div.2)\\f.cpp","group":"local","local":true}

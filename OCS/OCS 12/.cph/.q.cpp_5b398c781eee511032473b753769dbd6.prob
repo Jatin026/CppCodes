@@ -1,0 +1,1 @@
+{"name":"Local: q","url":"d:\\Jatin\\C++ Codes\\OCS\\OCS 12\\q.cpp","tests":[{"id":1645110108505,"input":"5\nJett 012345678\nViper 111111111\nNeon 987654321\nRaze 512610294\nReyna 192830492","output":"Jett\nRaze\nReyna"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\OCS\\OCS 12\\q.cpp","group":"local","local":true}

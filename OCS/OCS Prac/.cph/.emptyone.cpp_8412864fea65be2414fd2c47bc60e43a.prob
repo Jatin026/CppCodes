@@ -1,0 +1,1 @@
+{"name":"Local: emptyone","url":"d:\\Jatin\\C++ Codes\\OCS\\OCS Prac\\emptyone.cpp","tests":[{"id":1645335277487,"input":"3\n1\n5\n11\n","output":"333333336\n176954734\n769790067\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\OCS\\OCS Prac\\emptyone.cpp","group":"local","local":true}

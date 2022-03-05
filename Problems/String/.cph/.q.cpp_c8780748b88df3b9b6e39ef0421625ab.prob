@@ -1,0 +1,1 @@
+{"name":"Local: q","url":"d:\\Jatin\\C++ Codes\\Problems\\String\\q.cpp","tests":[{"id":1645874214317,"input":"4 4 4\n","output":""},{"id":1645874216066,"input":"3 6 9\n","output":""},{"id":1645874218850,"input":"0 0 0","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\String\\q.cpp","group":"local","local":true}

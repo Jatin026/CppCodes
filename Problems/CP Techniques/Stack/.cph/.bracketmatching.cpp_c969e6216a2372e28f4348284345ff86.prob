@@ -1,0 +1,1 @@
+{"name":"Local: bracketmatching","url":"d:\\Jatin\\C++ Codes\\Problems\\CP Techniques\\Stack\\bracketmatching.cpp","tests":[{"id":1645510704370,"input":"[[]])","output":"0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\CP Techniques\\Stack\\bracketmatching.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: noldbach","url":"d:\\Jatin\\C++ Codes\\Problems\\Maths\\noldbach.cpp","tests":[{"id":1645940608120,"input":"27 2\n","output":"YES"},{"id":1645940613480,"input":"45 7","output":"NO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\Maths\\noldbach.cpp","group":"local","local":true}

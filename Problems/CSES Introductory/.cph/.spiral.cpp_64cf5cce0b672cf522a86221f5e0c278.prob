@@ -1,0 +1,1 @@
+{"name":"Local: spiral","url":"d:\\Jatin\\C++ Codes\\Problems\\CSES Introductory\\spiral.cpp","tests":[{"id":1645246078574,"input":"3\n2 3\n1 1\n4 2","output":"8\n1\n15"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\CSES Introductory\\spiral.cpp","group":"local","local":true}

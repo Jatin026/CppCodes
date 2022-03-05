@@ -1,0 +1,1 @@
+{"name":"Local: interestingdrink","url":"d:\\Jatin\\C++ Codes\\Problems\\Binary  Search\\interestingdrink.cpp","tests":[{"id":1644398274919,"input":"5\n3 10 8 6 11\n4\n1\n10\n4\n11","output":"0\n4\n1\n5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\Binary  Search\\interestingdrink.cpp","group":"local","local":true}

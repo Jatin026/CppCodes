@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\Jatin\\C++ Codes\\OCS\\OCS11\\b.cpp","tests":[{"id":1644255533342,"input":"7 10\n","output":"108.395919545675"},{"id":1644257873954,"input":"11 10000000","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\OCS\\OCS11\\b.cpp","group":"local","local":true}
