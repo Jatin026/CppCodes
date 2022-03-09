@@ -58,21 +58,47 @@ ll BinExpItr(ll a , ll b){
     return res;
 }
 void solve(){
-    ll a,b,cnt=LONG_LONG_MAX;
-    cin>>a>>b;
-    if(a>=b){
-        cout<<a-b<<nline;
+    int n;
+    cin>>n;
+    vi v(n);
+    ll sum=0;
+    for(int i= 0 ; i < n ; i++){
+        cin>>v[i];
+        sum+=v[i];
     }
-    else{
-        for(int i=max(1LL,b-100); i<b+1000; i++){
-            cnt=min(cnt,abs((b)-(a|i))+1);
-        }
-        cout<<cnt<<nline;
+    int a=maxe(all(v));
+    // sort(all(v));
+    // int l=0,r=n-1,chance=n-1;
+    // while(l<r){
+    //     if(v[r]-v[l]>0){
+    //         if(v[chance]==1 && v[l]!=0) v[r]=v[r]-v[l] + 1;
+    //         else v[r]=v[r]-v[l];
+    //         v[l]=0;
+    //         l++;
+    //     }
+    //     else if(v[r]==v[l] && v[r]!=0){
+    //         v[r]=1;
+    //         v[l]=0;
+    //         l++;  
+    //     }
+    //     else{
+    //         if(v[chance]==1) v[l]=v[l]-v[r] + 1;
+    //         else v[l]=v[l]-v[r];
+    //         v[r]=0;
+    //         chance=l;
+    //         r--;
+    //     }
+    // }
+    // cout<<v[l]<<nline;
+    sum-=a;
+    if(a>sum){
+        cout<<a-sum<<nline;
     }
-     
-    
-     
-}   
+    else if(a==0){
+        cout<<0<<nline;
+    }
+    else cout<<1<<nline;
+}
 int main(){
     FAST
     int t;

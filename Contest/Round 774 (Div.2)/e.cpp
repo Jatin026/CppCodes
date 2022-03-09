@@ -57,25 +57,31 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
+bool good(int n){
+    int product=1,sum=0;
+    while(n>0){
+        int rem=n%10;
+        product*=rem; // 3^4+6^4   18
+        sum+=BinExpItr((rem),4);
+        n=n/10;
+    }
+    return (gcd(product,sum)!=1);
+}
 void solve(){
-    ll a,b,cnt=LONG_LONG_MAX;
-    cin>>a>>b;
-    if(a>=b){
-        cout<<a-b<<nline;
-    }
-    else{
-        for(int i=max(1LL,b-100); i<b+1000; i++){
-            cnt=min(cnt,abs((b)-(a|i))+1);
+    int b;
+    cin>>b;
+    int cnt=0;
+    for (int i = 1; i <= b; i++)
+    {    
+        if(good(i)){
+            cnt++;  
         }
-        cout<<cnt<<nline;
     }
-     
-    
-     
-}   
+    cout<<cnt<<nline ;
+}
 int main(){
     FAST
-    int t;
+    int t=1;
     cin>>t;
     while(t--){
         solve();

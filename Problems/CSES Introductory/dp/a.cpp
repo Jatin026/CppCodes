@@ -57,28 +57,33 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
+const int N=1e6+6;
+int dp[N];
+vi v={1,2,3,4,5,6};
+int cnt(int x){
+    if(x==0) return 1;
+    if(dp[x]!=-1) return dp[x];
+    int ans=0;
+    for (int i = 0; i < 6; i++)
+    {
+        if(x-v[i]>=0) ans=(ans+ (cnt(x-v[i])))%M;
+    }
+    return dp[x]=ans;
+}
 void solve(){
-    ll a,b,cnt=LONG_LONG_MAX;
-    cin>>a>>b;
-    if(a>=b){
-        cout<<a-b<<nline;
-    }
-    else{
-        for(int i=max(1LL,b-100); i<b+1000; i++){
-            cnt=min(cnt,abs((b)-(a|i))+1);
-        }
-        cout<<cnt<<nline;
-    }
-     
-    
-     
-}   
+    int n;
+    cin>>n;
+    mem1(dp);
+    cout<<cnt(n);
+}
 int main(){
     FAST
-    int t;
-    cin>>t;
+    int t=1;
+    //cin>>t;
     while(t--){
         solve();
     }
     return 0;
 }
+
+ 

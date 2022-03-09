@@ -58,25 +58,19 @@ ll BinExpItr(ll a , ll b){
     return res;
 }
 void solve(){
-    ll a,b,cnt=LONG_LONG_MAX;
-    cin>>a>>b;
-    if(a>=b){
-        cout<<a-b<<nline;
-    }
-    else{
-        for(int i=max(1LL,b-100); i<b+1000; i++){
-            cnt=min(cnt,abs((b)-(a|i))+1);
-        }
-        cout<<cnt<<nline;
+    // 5 27
+    for (int i = 0; i < 32 ; i++)
+    {
+        debug((5|i))
     }
      
     
      
-}   
+}
 int main(){
     FAST
-    int t;
-    cin>>t;
+    int t=1;
+    //cin>>t;
     while(t--){
         solve();
     }

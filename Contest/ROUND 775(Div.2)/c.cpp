@@ -46,6 +46,7 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
+const int N=1e6+7;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
@@ -57,26 +58,38 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
+vector<pair<int,int>> v[N];
 void solve(){
-    ll a,b,cnt=LONG_LONG_MAX;
-    cin>>a>>b;
-    if(a>=b){
-        cout<<a-b<<nline;
-    }
-    else{
-        for(int i=max(1LL,b-100); i<b+1000; i++){
-            cnt=min(cnt,abs((b)-(a|i))+1);
-        }
-        cout<<cnt<<nline;
-    }
+    int n,m;
+    cin>>n>>m;
      
+    for (int i = 0; i <  m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            int ele;
+            cin>>ele;
+            v[ele].pb({i,j});
+        }
+    }
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < v[i].size(); j++)
+        {
+            if(v[i].size()>1){
+                
+            }
+            else break;
+        }
+        
+    }
     
      
-}   
+}
 int main(){
     FAST
-    int t;
-    cin>>t;
+    int t=1;
+    //cin>>t;
     while(t--){
         solve();
     }

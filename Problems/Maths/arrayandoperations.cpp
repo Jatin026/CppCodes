@@ -58,21 +58,11 @@ ll BinExpItr(ll a , ll b){
     return res;
 }
 void solve(){
-    ll a,b,cnt=LONG_LONG_MAX;
-    cin>>a>>b;
-    if(a>=b){
-        cout<<a-b<<nline;
-    }
-    else{
-        for(int i=max(1LL,b-100); i<b+1000; i++){
-            cnt=min(cnt,abs((b)-(a|i))+1);
-        }
-        cout<<cnt<<nline;
-    }
-     
-    
-     
-}   
+    ll n,k;
+    cin>>n>>k;
+    if((n+k)%2==1 || k*k>n ) cout<<"NO\n";
+    else  cout<<"YES\n";
+}
 int main(){
     FAST
     int t;
