@@ -57,41 +57,37 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
+
+const int N=1e3+3;
+const int W = 1e5+2;
+int dp[N][W];
+int cnt(int n, int x,int price[], int page[]){
+    if(n==0 ||  x <= 0) return 0;
+    if(dp[n][x]!=-1) return dp[n][x];
+    int ans=(cnt(n-1,x,price,page));
+    if(price[n]>x) return dp[n][x]=ans;
+    else return dp[n][x]=(max(ans,(page[n]+(cnt(n-1,x-price[n],price,page)))));
 }
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+    int n,x;
+    cin>>n>>x;
+    int price[n+1],page[n+1];
+    page[0]=0;
+    price[0]=0;
+    
+    for (int i = 1 ; i <= n ; i++)
     {
-       cin>>x;
+        cin>>price[i];
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    for (int i = 1; i <= n ; i++)
     {
-        cout<<dp[i]<<"  ";
+        cin>>page[i];
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    cout<<cnt(n,x,price,page);
 }
 int main(){
     FAST
+    mem1(dp);
     int t=1;
     //cin>>t;
     while(t--){

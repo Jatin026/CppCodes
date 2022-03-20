@@ -57,38 +57,34 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+    string s;
+    cin>>s;
+    vi prefa(s.size()+1,0);
+    vi prefb(s.size()+1,0);
+
+    int ans=INT_MIN;
+    for (int i = 0; i < (int)s.size(); i++)
     {
-       cin>>x;
+        if(s[i]=='a'){
+            prefa[i+1]=1+prefa[i];
+            prefb[i+1]=prefb[i];
+        }
+        else{
+            prefb[i+1]=1+prefb[i];
+            prefa[i+1]=prefa[i];
+        }
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+ 
+    for (int i = 0; i < (int)s.size(); i++)
     {
-        cout<<dp[i]<<"  ";
+        for (int j = i; j < (int)s.size()  ; j++)
+        {
+            ans=max(ans,prefa[i]+prefb[j+1]-prefb[i]+prefa[s.size()]-prefa[j]);
+        }
+        
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    cout<<ans;
 }
 int main(){
     FAST

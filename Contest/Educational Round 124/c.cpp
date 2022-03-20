@@ -57,43 +57,78 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
+    int n,b1=-1;
+    cin>>n;
+    ll sum=INT_MAX;
+    vll a(n),b(n);
+    for( auto &x: a){
+        cin>>x;
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
+    for( auto &x: b){
+        cin>>x;
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    ll cnt1=INT_MAX;
+    for (int i = 0; i < n; i++)
+    {
+        if(cnt1>abs(-a[0]+b[i])){
+            cnt1=abs(b[i]-a[0]);
+            b1=i;
+        }     
+    }
+     
+    
+    ll cnt2=INT_MAX,a1;
+ 
+        for (int i = 0; i < n; i++)
+    {
+        if(cnt2>abs(-b[0]+a[i])){
+            cnt2=abs(b[0]-a[i]);
+            a1=i;
+        }
+        
+    }
+  
+     
+    ll cnt3=INT_MAX,b2;
+     
+        for (int i = n-1; i >-1 ; --i)
+    {
+        if(cnt3>abs(-a[n-1]+b[i])){
+            cnt3=abs(b[i]-a[n-1]);
+            b2=i;
+        }
+        
+    }
+         
+  
+     
+    ll cnt4=INT_MAX,a2;
+    
+        for (int i = 0  ; i < n; i++)
+    {
+        if(cnt4>abs(-a[i]+b[n-1])){
+            cnt4=abs(b[n-1]-a[i]);
+            a2=i;
+        }
+        
+    }
+         
+   
+    sum=min(sum,cnt1+cnt2+cnt3+cnt4);
+    sum=min(sum,abs(a[0]-b[0])+abs(b[n-1]-a[n-1]));
+    sum=min(sum,cnt1+cnt2+abs(b[n-1]-a[n-1]));
+    sum=min(sum,cnt3+cnt4+abs(b[0]-a[0]));
+    sum=min(sum,cnt2+cnt3+abs(a[0]-b[n-1]));
+    sum=min(sum,cnt1+cnt3+abs(b[0]-a[n-1])+abs(b[n-1]-a[0]));
+    sum=min(sum,cnt1+cnt4+abs(b[0]-a[n-1]));
+    sum=min(sum,abs(a[0]-b[n-1])+abs(a[n-1]-b[0]));
+    cout<<sum<<nline;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

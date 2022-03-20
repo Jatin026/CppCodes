@@ -27,7 +27,6 @@ typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -50,45 +49,61 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+    int n;
+    cin>>n;   
+    vi v(n,-1);
+    for (int i = 2; i <= n; i++)
     {
-       cin>>x;
+        cout<<"? ";
+        for (int j = 1 ; j <= n; j++)
+        {
+             
+            if(j==n){
+                cout<<i<<" ";
+            } 
+            else cout<<1<<" ";
+            
+        }
+        cout<<endl;
+        int ind;
+        cin>>ind;
+        if(ind==0){
+            v[n-1]=n-i+2;
+            break;
+        }
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    if(v[n-1]==-1) v[n-1]=1;
+    for (int i = 1; i <= n; i++)
     {
-        cout<<dp[i]<<"  ";
+        cout<<"? ";
+        for (int j = 1 ; j <= n; j++)
+        {
+             
+            if(j==n){
+                cout<<n-v[n-1]+1<<" ";
+            } 
+            else cout<<i<<" ";
+            
+        }
+        cout<<endl;
+        int ind;
+        cin>>ind;
+        if(ind!=0 && v[ind-1]==-1) v[ind-1]=n-i+1;
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+     cout<<"! ";
+    for (auto x : v)
+    {
+       cout<<x<<" ";
+    }
+    cout<<endl;
 }
 int main(){
     FAST

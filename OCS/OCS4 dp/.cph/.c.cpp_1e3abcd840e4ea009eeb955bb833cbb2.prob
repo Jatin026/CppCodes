@@ -1,0 +1,1 @@
+{"name":"Local: c","url":"d:\\Jatin\\C++ Codes\\OCS\\OCS4 dp\\c.cpp","tests":[{"id":1647063419972,"input":"abba\n","output":"4"},{"id":1647063426156,"input":"bab\n","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\OCS\\OCS4 dp\\c.cpp","group":"local","local":true}

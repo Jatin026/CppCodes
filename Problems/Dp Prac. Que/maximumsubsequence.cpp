@@ -27,7 +27,6 @@ typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -50,45 +49,68 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
+ 
+ 
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
+    int n,m;
+    cin>>n>>m;
+    vi v(n);
+ 
+    for(auto &x : v){
+        cin>>x;
+        x=x%m;
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    set<int> s1,s2;
+    ll ans=INT_MIN;
+    for (int i = 1; i < (1<<(n/2)); i++)
     {
-        cout<<dp[i]<<"  ";
+        string s=binarystring(40,i);
+        reverse(all(s));
+         
+        ll sum=0;
+        for (int j = 0; j <= n/2; j++)
+        {
+            if(s[j]=='1') sum+=v[j];
+        }
+        sum%=m;
+        ans=max(ans,sum);
+        s1.insert(sum);
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+     
+    for (int i = 1; i < (1<<((n+1)/2)); i++)
+    {
+        string s=binarystring(40,i);
+        reverse(all(s));
+         
+        ll sum=0;
+        for (int j = 0; j< (n+1)/2; j++)
+        {
+            if(s[j]=='1') sum+=v[j+(n)/2];
+        }
+        sum%=m;
+        ans=max(ans,sum);
+        s2.insert(sum);
+    }
+    s2.insert(0);
+    for(auto sum : s1){
+        auto it = s2.upper_bound(m-sum-1);
+        if(it==s2.begin())   ans=max(ans,((ll)(*it)+sum)%m);
+        else {
+            it=prev(it);
+           ans=max(ans,((ll)(*(it))+sum)%m);
+        }
+    }
+     
+    cout<<ans;
+     
+     
 }
 int main(){
     FAST

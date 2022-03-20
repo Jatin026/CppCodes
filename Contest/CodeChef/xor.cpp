@@ -50,50 +50,43 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod2;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod2;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    ll ans=0;
+    string k="";
+    for (int i = 0; i < n; i++)
     {
-       cin>>x;
+        if(i%2==0){
+            ans=ans^(s[i]-'0');
+            k+=to_string(ans);
+        }
+        else{
+            k+=to_string(ans);
+        }
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    reverse(all(k));
+    ll anss=0;
+    int temp=k.size();
+    for (int i = 0; i < temp; i++)
     {
-        cout<<dp[i]<<"  ";
+        anss=(anss+(k[i]-'0')*BinExpItr(2,i))%mod2;
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    cout<<anss<<nline;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

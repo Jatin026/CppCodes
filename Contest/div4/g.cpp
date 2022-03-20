@@ -57,43 +57,35 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
+    int n;
+    cin>>n;
+    if(n<4) cout<<-1<<nline;
+    else{
+        vi o,e;
+        e.pb(2);
+        for(int i=6 ; i <= n ; i++){
+            if(i%2==0) e.pb(i);
+        }
+        for (int i = 1; i <= n ; i++)
+        {
+            if(i%2==1) o.pb(i);
+        }
+        reverse(all(o));
+        for(auto x : o){
+            cout<<x<<" ";
+        }
+        cout<<4<<" ";
+        for(auto x : e){
+            cout<<x<<" ";
+        }
+        cout<<nline;
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
-    }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

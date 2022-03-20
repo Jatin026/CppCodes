@@ -57,43 +57,48 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
+    int n;
+    cin>>n;
+    vi v(n);
+    map<int,int> m;
+    for(auto &x : v){
+        cin>>x;
+        m[x]++;
     }
     sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    
+    int ans=INT_MIN;
+    for (int w = 2*v[0]; w <= 2*v[n-1]; w++)
     {
-        cout<<dp[i]<<"  ";
+        map<int,int> temp1=m;
+        int cnt=0;
+        for (int i = 0; i < n; i++)
+        {
+            if(2*v[i]==w && temp1[v[i]]>1){
+                temp1[v[i]]-=2;
+                cnt++;
+                
+            }
+            else if(v[i]<w && 2*v[i]!=w &&  temp1[v[i]]>0  && temp1[w-v[i]]>0){
+                
+                cnt++;
+                temp1[v[i]]--;
+                temp1[w-v[i]]--;
+                 
+            }
+            else if(v[i]>w) break;
+        }
+        // debug(cnt) 
+        // debug(w)
+        ans=max(ans,cnt);  
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    cout<<ans<<nline;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

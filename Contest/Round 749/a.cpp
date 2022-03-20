@@ -27,7 +27,6 @@ typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -50,50 +49,74 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
+bool isprime(int n){
+    for (int i = 2; i*i <= n ; i++)
     {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
+        if(n%i==0) return 0;
     }
-    return dp[x]=ans;
+    return 1;
 }
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+    int n;
+    cin>>n;
+    vi v(n);
+    int sum=0;
+    map<int,int> m;
+    for (int i = 0; i < n; i++)
     {
-       cin>>x;
+        cin>>v[i];
+        m[v[i]]=i+1;
+        sum+=v[i];
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
+    if(sum%2==0){
+        cout<<n<<nline;
+        for (int i = 0; i < n; i++)
+        {
+            cout<<i+1<<" ";
+        }
+        cout<<nline;
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    else{
+        if(isprime(sum)){
+        sort(all(v));
+        int ele;
+        for (int i = 0; i < n ; i++)
+        {
+            if(v[i]%2==1){
+               ele =v[i];
+                break;
+            }
+        }
+        cout<<n-1<<nline;
+        for (int i = 0; i < n ; i++)
+        {
+           if(v[i]!=ele){
+               cout<<m[v[i]]<<" ";
+           }
+        }
+        cout<<nline;
+        }
+        else{
+            cout<<n<<nline;
+        for (int i = 0; i < n; i++)
+        {
+            cout<<i+1<<" ";
+        }
+        cout<<nline;
+        }
+    }
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

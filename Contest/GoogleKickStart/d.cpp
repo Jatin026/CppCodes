@@ -22,12 +22,12 @@
 #define vll            vector<ll>
 #define vvi            vector<vi>
 #define vpr            vector<pr> 
+#define print(ca,x) cout<<"Case #"<<ca<<": "<<x<<nline
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -50,52 +50,41 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
+bool interesting(int n){
+    int sum=0, prod=1;
+    while(n>0){
+        int rem=n%10;
+        sum+=rem;
+        prod*=rem;
+        n=n/10;
     }
-    return dp[x]=ans;
+    return(prod%sum==0);
 }
-void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+void solve(int ca){
+    int a,b;
+    cin>>a>>b;
+    int cnt=0;
+    for (int i = a; i <= b ; i++)
     {
-       cin>>x;
+        if(interesting(i)) cnt++;
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
-    }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    print(ca,cnt);
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
+    int ca=1;
     while(t--){
-        solve();
+        solve(ca);
+        ca++;
     }
     return 0;
 }

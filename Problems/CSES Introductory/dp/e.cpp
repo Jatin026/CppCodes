@@ -59,33 +59,32 @@ ll BinExpItr(ll a , ll b){
 }
 const int N = 1e6+7;
 ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
+ll cnt(ll x){
+    if(x==0) return 0;
     if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
+    ll ans=INT_MAX;
+    ll temp=x;
+    vi v;
+    while(temp>0){
+        if(temp%10!=0)v.pb(temp%10);
+        temp/=10;
+    }
+    sort(all(v));
+    for (int i = 0; i < (int)v.size(); i++)
     {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
+        if(x-v[i]>=0) ans=min(ans,1+cnt(x-v[i]));
     }
     return dp[x]=ans;
 }
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
-    }
-    sort(all(v));
+    ll n;
+    cin>>n;
     mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
-    }
+    ll ans = cnt(n);
+    // for (int i = 0; i <= 27 ; i++)
+    // {
+    //     cout<<dp[i]<<"  ";
+    // }
     cout<<"\n";
     if(ans!=INT_MAX) cout<<ans ;
     else cout<<-1;

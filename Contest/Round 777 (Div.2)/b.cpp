@@ -57,45 +57,48 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+    int n,m;
+    cin>>n>>m;
+    bool a[n][m];
+    for (int i = 0; i < n; i++)
     {
-       cin>>x;
+        string s;
+        cin>>s;
+        for(int j =0 ; j < m ; j++){
+            a[i][j]=(int)(s[j]-'0');
+        }
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    for (int i = 0; i < n; i++)
     {
-        cout<<dp[i]<<"  ";
+        for(int j =0 ; j < m ; j++){
+            if(i<n-1 && j<m-1 && a[i][j] && a[i+1][j] && a[i+1][j+1] && a[i][j+1]!=1){
+                cout<<"NO\n";
+                return;
+            }
+            if(i<n-1 && j<m-1 && a[i][j] && a[i][j+1] && a[i+1][j+1] && a[i+1][j]!=1){
+                cout<<"NO\n";
+                 
+                return;
+            }
+            if(i<n-1 && j>0 && a[i][j] && a[i+1][j-1] && a[i+1][j] && a[i][j-1]!=1){
+                cout<<"NO\n";
+                return;
+            }if(i<n-1 && j<m-1 && a[i][j] && a[i+1][j] && a[i][j+1] && a[i+1][j+1]!=1){
+                cout<<"NO\n";
+                return;
+            }
+        }
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    cout<<"YES\n";
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }
+   
     return 0;
 }

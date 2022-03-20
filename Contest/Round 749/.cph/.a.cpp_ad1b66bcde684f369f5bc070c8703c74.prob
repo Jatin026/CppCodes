@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\Round 749\\a.cpp","tests":[{"id":1647610608349,"input":"4\n3\n8 1 2\n4\n6 9 4 2\n9\n1 2 3 4 5 6 7 8 9\n3\n200 199 198\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\Round 749\\a.cpp","group":"local","local":true}

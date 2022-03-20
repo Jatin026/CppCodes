@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\Jatin\\C++ Codes\\Contest\\PAG RECRUITMENT\\b.cpp","tests":[{"id":1647445536813,"input":"5\n1 1 2 4 8\n","output":"HOORAY"},{"id":1647445545235,"input":"4\n1 2 4 8","output":"GOODBYE JOJO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\PAG RECRUITMENT\\b.cpp","group":"local","local":true}

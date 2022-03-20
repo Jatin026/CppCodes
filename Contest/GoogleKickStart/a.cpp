@@ -22,12 +22,12 @@
 #define vll            vector<ll>
 #define vvi            vector<vi>
 #define vpr            vector<pr> 
+#define print(ca,x) cout<<"Case #"<<ca<<": "<<x<<nline
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -50,52 +50,50 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
+void solve(int ca){
+     
+    string a,b;
+    cin>>a>>b;
+    auto it = b.begin();
+    int cnt=0;
+    if(a.size()>b.size()){
+        print(ca,"IMPOSSIBLE");
+        return;
     }
-    return dp[x]=ans;
-}
-void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+    for (int i = 0; i < a.size(); i++)
     {
-       cin>>x;
+        while(i<b.size()  &&  b[i]!=a[i] ){
+            b.erase(it+i);
+            cnt++;
+            debug(b)
+        }
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
+    while(b.size()>a.size()){
+        b.pop_back();
+        cnt++;
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    if(a!=b){
+        print(ca,"IMPOSSIBLE");
+    }
+    else{   
+        print(ca,cnt);
+    }
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
+    int ca=1;
     while(t--){
-        solve();
+        solve(ca);
+        ca++;
     }
     return 0;
 }

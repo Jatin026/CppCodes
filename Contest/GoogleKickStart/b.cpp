@@ -22,12 +22,12 @@
 #define vll            vector<ll>
 #define vvi            vector<vi>
 #define vpr            vector<pr> 
+#define print(ca,x) cout<<"Case #"<<ca<<": "<<x<<nline
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -50,52 +50,59 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
+string min(string a , string b){
+    if(a>b){
+        return b;
     }
-    return dp[x]=ans;
+    else return a;
 }
-void solve(){
-    ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
+void solve(int ca){
+    string n;
+    cin>>n;
+    ll sum=0;
+    for (int i = 0; i < n.size(); i++)
     {
-       cin>>x;
+        sum+=n[i]-'0';
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    string dig2="0";
+    int digi=9-sum%9;
+    string dig=to_string(digi);
+    string s=n+dig;
+    if(digi==9){
+        for (int i = 1; i <= 1; i++)
     {
-        cout<<dp[i]<<"  ";
+        s=min((n.substr(0,i)+dig2+n.substr(i)),s);
+             
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+        s=min(s,(n+dig2));
+    }
+    for (int i = 0; i < n.size(); i++)
+    {
+        if(n[i]-'0'>digi){
+            s=min((n.substr(0,i)+dig+n.substr(i)),s);
+            break;
+        }
+             
+    }
+    s=min(s,(n+dig));
+    print(ca,s);
+     
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
+    int ca=1;
     while(t--){
-        solve();
+        solve(ca);
+        ca++;
     }
     return 0;
 }

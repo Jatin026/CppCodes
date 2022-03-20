@@ -27,7 +27,6 @@ typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -50,45 +49,55 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a)%mod;
         }
-        a=(a*a)%M;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
-}
+const int N =1e6+7;
+int pref[N];
+vi prime(N,1);
 void solve(){
-    ll n,k;
+    for (int p = 2; p * p <= N; p++)
+    {
+        // If prime[p] is not changed,
+        // then it is a prime
+        if (prime[p] == 1)
+        {
+            // Update all multiples
+            // of p greater than or
+            // equal to the square of it
+            // numbers which are multiple
+            // of p and are less than p^2
+            // are already been marked.
+            for (int i = p * p; i <= N; i += p)
+                prime[i] = 0;
+        }
+    }
+    pref[0]=0;
+    int n,k;
     cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
+    vi v(n);
+    for(auto &x : v){
+        cin>>x;
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
+    for (int i = 0; i < n; i++)
     {
-        cout<<dp[i]<<"  ";
+        if(v[i]!=1) pref[i+1]=pref[i]+prime[v[i]];
+        else pref[i+1]=pref[i];
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    ll l=1 , ans=0;
+    for (int r = 1; r <= n ; r++)
+    {
+        while(pref[r]-pref[l-1]>k){
+            l++;
+        }
+        ans+=(r-l+1);
+    }
+    cout<<ans;
+
 }
 int main(){
     FAST

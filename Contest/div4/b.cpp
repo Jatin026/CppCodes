@@ -57,43 +57,64 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
+void print(vi &v){
+    for(auto x : v){
+        cout<<x<<" ";
     }
-    return dp[x]=ans;
+    cout<<nline;
 }
 void solve(){
-    ll n,k;
+    int n,k;
     cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
+    int temp=k;
+    vi v;
+    if(n<k){
+        cout<<"NO\n";
+        return;
     }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
+    if(k==1){
+        cout<<"YES\n";
+        cout<<n<<nline;
+        return;
     }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    if((n+k)%2==0 ){
+        cout<<"YES\n";
+        for (int i = 0; i < k-1; i++)
+        {
+            v.pb(1);
+            n--;
+        }
+        v.pb(n);
+        print(v);
+    }
+    else{
+        if(n%2==1 && k%2==0 ){
+            cout<<"NO\n";
+        }
+
+        else{
+            if(n%2==0 && (k<=n/2)){
+            cout<<"YES\n";
+            for (int i = 0; i < k-1; i++)
+            {
+                v.pb(2);
+                n-=2;
+            }
+            v.pb(n);
+            }
+            else{
+                cout<<"NO\n";
+                return;
+            }
+            print(v);
+        }
+    }
+     
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

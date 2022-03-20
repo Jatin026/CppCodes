@@ -50,50 +50,36 @@ ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%M;
+            res=(res*a);
         }
-        a=(a*a)%M;
+        a=(a*a);
         b>>=1;
     }
     return res;
 }
-const int N = 1e6+7;
-ll dp[N];
-ll cnt(ll x, vector<ll> &v){
-    if(x==0) return 1;
-    if(dp[x]!=-1) return dp[x];
-    ll ans=0;
-    int n= (int)v.size();
-    for (int i = 0; i < n ; i++)
-    {
-        if(x-v[i]>=0) ans=(ans+cnt(x-v[i],v))%M;
-        else break;
-    }
-    return dp[x]=ans;
+ll findLargestPower(ll n)
+{
+    ll x = 0;
+    while ((1LL << x) <= n)
+        x++;
+    return x - 1;
+}
+ll countSetBits(ll n )
+{
+    if (n <= 1)
+        return n;
+    ll x = findLargestPower(n);
+    return (x * BinExpItr(2,x-1))+ (n - BinExpItr(2,x) + 1) + countSetBits(n - BinExpItr(2,x));
 }
 void solve(){
     ll n,k;
-    cin>>n>>k;
-    vll v(n);
-    for (auto &x : v)
-    {
-       cin>>x;
-    }
-    sort(all(v));
-    mem1(dp);
-    ll ans = cnt(k,v);
-    for (int i = 0; i <= k ; i++)
-    {
-        cout<<dp[i]<<"  ";
-    }
-    cout<<"\n";
-    if(ans!=INT_MAX) cout<<ans ;
-    else cout<<-1;
+    cin>>n>>k; 
+    cout<<countSetBits(k)<<nline;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

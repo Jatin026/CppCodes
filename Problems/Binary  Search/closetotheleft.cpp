@@ -33,3 +33,15 @@ int main(){
     
     return 0;
 }
+
+/*
+
+    Kuch reply likhwa do vaiya
+
+    
+
+
+
+
+*/
+ 
