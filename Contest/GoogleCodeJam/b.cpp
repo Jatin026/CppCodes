@@ -22,6 +22,7 @@
 #define vll            vector<ll>
 #define vvi            vector<vi>
 #define vpr            vector<pr> 
+#define print(ca,x) cout<<"Case #"<<ca<<": "<<x
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
@@ -45,41 +46,66 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res*a)%mod;
         }
-        a=(a*a)%p;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
-    }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
+bool sortbysec(const pair<int,int> &a,
+              const pair<int,int> &b)
+{
+    return (a.second < b.second);
 }
-void solve(){
-    int n;
-    cin>>n;
-    cout<<ans(n);
+void solve(int ca){
+    int ma=INT_MAX,mb=INT_MAX,mc=INT_MAX,md=INT_MAX;
+    for(int i =0 ; i < 3 ; i ++){
+        int a,b,c,d;
+        cin>>a>>b>>c>>d;
+        ma=min(a,ma);
+        mb=min(b,mb);
+        mc=min(c,mc);
+        md=min(d,md);
+    }
+    vpr v;
+    v.pb({ma,1});
+    v.pb({mb,2});
+    v.pb({mc,3});
+    v.pb({md,4});
+    sort(all(v));
+    reverse(all(v));
+    if(ma+mb+mc+md<1e6) print(ca,"IMPOSSIBLE")<<nline;
+    else {
+        int sum=ma+mb+mc+md-1e6;
+        for(auto &x : v){
+            if(x.first>=sum){
+                x.first=(x.first-sum);
+                break;
+            }
+            else{
+                sum-=x.first;
+                x.first=0;
+            }
+        }
+        sort(all(v),sortbysec);
+        print(ca,v[0].first);
+        cout<<" "<<v[1].first<<" "<<v[2].first<<" "<<v[3].first<<nline;
+        
+}
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
+    int ca=1;
     while(t--){
-        solve();
+        solve(ca);
+        ca++;
     }
     return 0;
 }

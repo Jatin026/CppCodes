@@ -45,39 +45,63 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res*a)%mod;
         }
-        a=(a*a)%p;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
-    }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
-}
 void solve(){
-    int n;
-    cin>>n;
-    cout<<ans(n);
+    int n,k;
+    cin>>n>>k;
+    vi v(n);
+    for(auto &x : v){
+        cin>>x;
+    }
+    int sum=0;
+    int marked[n];
+    mem0(marked);
+    sort(all(v));
+    for (int i = n-1; i > -1 ; --i)
+    {
+        if(k==0) break;
+        if(marked[i]==0 ){
+        int ele=v[i];
+        int ind=i;
+        marked[i]=1;
+        for(int j =i-1 ; j > -1 ;j--){
+            if(v[j]/v[i] ==1 && marked[j]==0){
+                ele=v[j]/v[i];
+                ind=j;
+                break;
+            }
+            else if(v[j]/v[i] ==0  && marked[j]==0){
+                ele=v[j]/v[i];
+                ind=j;
+            }
+             
+        }
+        debug(ele)
+        debug(ind)
+        sum+=ele;
+        k--;
+        marked[ind]=1;
+        }
+    }
+    for(int i =0 ; i <  n ; i++){
+        if(marked[i]==0) sum+=v[i];
+    }
+    cout<<sum<<nline;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

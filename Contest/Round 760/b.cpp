@@ -45,39 +45,60 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res*a)%mod;
         }
-        a=(a*a)%p;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
-    }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
-}
 void solve(){
     int n;
     cin>>n;
-    cout<<ans(n);
+    int temp=n-2;
+    vector<string> v(temp);
+    for(auto &x : v){
+        cin>>x;
+    }
+    bool flag=false;
+    for ( int i = 0; i < temp-1; i++)
+    {
+        if(v[i][1]!=v[i+1][0]) flag=true;
+    }
+    if(flag){
+        for ( int i = 0; i < temp-1; i++)
+    {
+        if(v[i][1]!=v[i+1][0]){
+            cout<<v[i];
+        }
+        else cout<<v[i][0];
+    }
+        cout<<v[temp-1]<<nline;
+        return;
+    
+    }
+    if(temp==1){
+        cout<<"b"<<v[0]<<nline;
+        return;
+    }
+    cout<<v[0];
+    
+    for (int i = 1; i < temp-1; i++)
+    {
+        cout<<v[i][0];
+    }
+    cout<<v[temp-1]<<nline;
+    
+
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

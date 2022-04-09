@@ -45,39 +45,95 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res*a)%mod;
         }
-        a=(a*a)%p;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
-    }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
-}
 void solve(){
-    int n;
-    cin>>n;
-    cout<<ans(n);
+    string s;
+    cin>>s;
+    int cu=0,ru=0;
+    bool flagu=false;
+    for (int i = 2; i < s.size(); i++)
+    {
+        if(s[0]=='R' && s[i]=='C' && s[i-1]<'A' ) flagu=true;
+        else{
+            if(flagu && s[i]=='C'){
+                flagu=false;
+                break;
+            }
+        }
+    }
+    
+    if(flagu ){
+        auto it = find(all(s),'C');
+        int ind = it-s.begin();
+        int r;
+        stringstream ri(s.substr(1,ind-1));
+        ri>>r;
+        //int r= stoll(s.substr(1,ind-1));
+        int c;
+        stringstream ci(s.substr(ind+1));
+        ci>>c;
+        vi v;
+        debug(c)
+      
+        while(c>0){
+            if(c%26!=0) {
+                v.pb(c%26);
+                c/=26;
+            }
+            else {v.pb(26);
+                c/=26;
+                c--;
+            }
+            
+        }
+        debug(r)
+        debug(ind)
+        reverse(all(v));
+        for ( auto &x : v){
+            cout<<char(x+64);
+        }
+        cout<<r<<nline;
+    }
+    else{
+        int ind=0;
+        for (int i = 0; i < s.size() ; i++)
+        {
+            if(s[i]<'A'){
+                ind=i;
+                break;
+            }
+        }
+
+        int r;
+        stringstream ri(s.substr(ind));
+        ri>>r;
+        string a=s.substr(0,ind);
+        reverse(all(a));
+        ll c=0;
+        ll prod=1;
+        for (int i = 0; i < a.size(); i++)
+        {
+            c+=(a[i]-64)*prod;
+            prod*=26;
+        }
+        cout<<"R"<<r<<"C"<<c<<nline;
+        
+    }
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

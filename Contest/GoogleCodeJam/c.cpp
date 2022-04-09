@@ -22,6 +22,7 @@
 #define vll            vector<ll>
 #define vvi            vector<vi>
 #define vpr            vector<pr> 
+#define print(ca,x) cout<<"Case #"<<ca<<": "<<x
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
@@ -45,41 +46,41 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res*a)%mod;
         }
-        a=(a*a)%p;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
-    }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
-}
-void solve(){
+
+void solve(int ca){
     int n;
     cin>>n;
-    cout<<ans(n);
+    int cnt=1;
+    vi v(n);
+    for(auto &x : v){
+        cin>>x;
+    }
+    sort(all(v));
+    for (int i = 0; i < n; i++)
+    {
+        if(cnt<=v[i]) cnt++;
+    }
+    print(ca,cnt-1)<<nline;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
+    int ca=1;
     while(t--){
-        solve();
+        solve(ca);
+        ca++;
     }
     return 0;
 }

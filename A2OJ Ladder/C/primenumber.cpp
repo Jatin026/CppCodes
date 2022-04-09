@@ -45,34 +45,46 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
-ll BinExpItr(ll a , ll b){
-    ll res=1;
+ll BinMulti(ll a , ll b){
+    ll res=0;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res+a)%mod;
         }
-        a=(a*a)%p;
+        a=(a+a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
+ll BinExpItr(ll a , ll b){
+    ll res=1;
+    while(b){
+        if(b&1){
+            res=BinMulti(res,a)%mod;
+        }
+        a=BinMulti(a,a)%mod;
+        b>>=1;
     }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
+    return res;
 }
+ 
 void solve(){
-    int n;
-    cin>>n;
-    cout<<ans(n);
+   ll n,x;
+   cin>>n>>x;
+   vi v(n);
+   ll prod=1;
+   for(auto &e : v){
+       cin>>e;
+       prod=(BinMulti(prod,BinExpItr(x,e)));
+   } 
+   ll ans=0;
+   for(auto e : v ){
+       ans=(ans+BinMulti(prod,BinExpItr(BinExpItr(x,e),mod-2)))%mod;
+   }
+   debug(ans)
+   debug(prod)
+   cout<<gcd(ans,prod)<<nline;
+   cout<<gcd(27LL,BinExpItr(3,10000));
 }
 int main(){
     FAST

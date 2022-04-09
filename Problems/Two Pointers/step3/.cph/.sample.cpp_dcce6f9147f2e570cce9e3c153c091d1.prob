@@ -1,0 +1,1 @@
+{"name":"Local: sample","url":"d:\\Jatin\\C++ Codes\\Problems\\Two Pointers\\step3\\sample.cpp","tests":[{"id":1649008073882,"input":"9 12 7 3 12\n3 10 6 2 8\n8 24 17 6 10\n15 21 10 8 12\n18 19 22 24 25","output":"18"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\Two Pointers\\step3\\sample.cpp","group":"local","local":true}

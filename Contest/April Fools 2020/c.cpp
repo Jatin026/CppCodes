@@ -45,34 +45,38 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res*a)%mod;
         }
-        a=(a*a)%p;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
-    }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
-}
+
 void solve(){
-    int n;
-    cin>>n;
-    cout<<ans(n);
+    string s;
+    cin>>s;
+    map<int,int> m;
+    m[1]=1;
+    m[6]=2;
+    m[4]=3;
+    m[3]=4;
+    m[5]=5;
+    m[2]=6;
+    m[7]=7;
+    m[0]=0;
+    m[8]=8;
+    m[9]=9;
+    for (int i = 0; i < s.size(); i++)
+    {
+        cout<<m[s[i]-'0'];
+    }
+    
+
 }
 int main(){
     FAST

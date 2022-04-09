@@ -1,0 +1,1 @@
+{"name":"Local: abc244_d","url":"d:\\Jatin\\C++ Codes\\AtCoder\\abc244_d.cpp","tests":[{"id":1648953709193,"input":"R G B\nR G B","output":"Yes"},{"id":1648954057912,"input":"R G B\nG R B","output":"yes"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\AtCoder\\abc244_d.cpp","group":"local","local":true}

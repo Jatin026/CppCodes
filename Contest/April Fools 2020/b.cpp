@@ -45,34 +45,64 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-ll M=1e9+7;
-ll p = M*M;
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
         if(b&1){
-            res=(res*a)%p;
+            res=(res*a)%mod;
         }
-        a=(a*a)%p;
+        a=(a*a)%mod;
         b>>=1;
     }
     return res;
 }
-int ans(int n){
-    if(n==0) return 0;
-    vi v;
-    int temp=n;
-    while(temp>0){
-        v.pb(temp%10);
-        temp/=10;
+int sumdig(int tem){
+    int sum=0;
+    while(tem>0){
+        sum+=tem%10;
+        tem/=10;
     }
-    sort(all(v));
-    return(1+ans(n-v[v.size()-1]));
+    return sum;
 }
-void solve(){
+bool uniqueele(int a, int b){
+    vi cnt(10,0);
+    while(a>0){
+        cnt[a%10]++;
+        a/=10;
+    }
+    while(b>0){
+        if(cnt[b%10]>0) return 0;
+        b/=10;
+    }
+    return 1;
+}
+bool good(int n){
+    int cnto=0,cnte=0;
+    while(n>0){
+        if((n%10)%2==0) cnte++;
+        else cnto++;
+        n/=10;
+    }
+    return (cnto>cnte);
+}
+void solve(){ 
     int n;
     cin>>n;
-    cout<<ans(n);
+    int sum=0;
+    int tem=n;
+    while(tem>0){
+        sum+=tem%10;
+        tem/=10;
+    }
+    if(1<<(int)(ceil(log2(sum)))==sum) sum+=1<<(int)(ceil(log2(sum))-1);
+    else if(sum%2==0) sum+=1;
+    for (int i = n+1; i < 1e6+7; i++)
+    {
+        if(sumdig(i)==sum  && good(i)){
+            cout<<i;
+            return;
+        }
+    }
 }
 int main(){
     FAST

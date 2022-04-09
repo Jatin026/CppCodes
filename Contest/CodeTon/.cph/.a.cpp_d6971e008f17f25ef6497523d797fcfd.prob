@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\CodeTon\\a.cpp","tests":[{"id":1648198281802,"input":"3\n3\n5 2 7\n5\n1 4 2 2 3\n1\n2\n","output":"2 3\n1 2\n1 1"},{"id":1648199185535,"input":"1\n5\n9 9 3 9 10","output":"3 5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\CodeTon\\a.cpp","group":"local","local":true}
