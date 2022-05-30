@@ -1,32 +1,92 @@
-#include<iostream>
-#include<vector>
-#include<cmath>
+#include<bits/stdc++.h>
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+#define all(s) s.begin(),s.end()
+#define gcd            __gcd
+#define setbits(x)     __builtin_popcountll(x)
+#define binarystring(n,x) bitset<n> (x).to_string()
+#define zrobits(x)     __builtin_ctzll(x)
+#define mod            1000000007
+#define mod2           998244353
+#define maxe           *max_element
+#define mine           *min_element
+#define pb             push_back
+#define lb             lower_bound
+#define ub             upper_bound
+#define mk             make_pair
+#define deci(x, y)     fixed<<setprecision(y)<<x
+#define PI             3.141592653589793238
+#define mem0(x)        memset(x,0,sizeof x)
+#define mem1(x)        memset(x,-1,sizeof x)
+#define pr             pair<int,int>
+#define vi             vector<int>
+#define vll            vector<ll>
+#define vvi            vector<vi>
+#define vpr            vector<pr> 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
 using namespace std;
-int sum_digit(int n){
-    int sum=0;
-    while (n>0)
-    {
-        sum+=n%10;
-        n=n/10;
+
+#define nline '\n'
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
+#else
+#define debug(x)
+#endif
+void _print(ll t) {cerr << t;}
+void _print(int t) {cerr << t;}
+void _print(string t) {cerr << t;}
+void _print(char t) {cerr << t;}
+void _print(lld t) {cerr << t;}
+void _print(double t) {cerr << t;}
+void _print(ull t) {cerr << t;}
+template <class T, class V> void _print(pair <T, V> p);
+template <class T> void _print(vector <T> v);
+template <class T> void _print(set <T> v);
+template <class T, class V> void _print(map <T, V> v);
+template <class T> void _print(multiset <T> v);
+ll BinExpItr(ll a , ll b){
+    ll res=1;
+    while(b){
+        if(b&1){
+            res=(res*a);
+        }
+        a=(a*a);
+        b>>=1;
     }
-    return sum;
+    return res;
+}
+void solve(){
+    int a,b,c ;
+    cin>>a>>b>>c ;
+    vi ans;
+    for (int sum_dig = 1 ; sum_dig < 82; sum_dig++)
+    {
+        ll x= BinExpItr(sum_dig,a)*b+c ;
+        ll temp=x;
+        int sum=0;
+        if(x>0){
+        while(temp>0){
+            sum+=temp%10;
+            temp/=10;
+        }
+        }
+        if(sum==sum_dig && x<1e9){
+            ans.pb(x);
+        }
+    }
+    sort(all(ans));
+    cout<<ans.size()<<nline;
+    for(auto x : ans){
+        cout<<x<<" ";
+    } 
 }
 int main(){
-    // int a,b,c;
-    // cin>>a>>b>>c;
-    // vector<int> v;
-    // for (int i = c; i <1e6 ; i++)
-    // {
-    //     if(sum_digit(i)==pow((i-c)/b,1.0/a)){
-    //         v.push_back(i);
-    //     }
-    // }
-    // cout<<v.size()<<endl;
-    // for (int i = 0; i < v.size(); i++)
-    // {
-    //     cout<<v[i]<<" ";
-    // }
-    int a=30,b=11;
-    cout<<a/b--;
+    FAST
+    int t=1;
+    //cin>>t;
+    while(t--){
+        solve();
+    }
     return 0;
 }

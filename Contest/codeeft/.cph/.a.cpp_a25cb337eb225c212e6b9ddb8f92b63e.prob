@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\codeeft\\a.cpp","tests":[{"id":1650298141518,"input":"2\n3\n10 10 1\n2\n6 7\n","output":"YES\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\codeeft\\a.cpp","group":"local","local":true}

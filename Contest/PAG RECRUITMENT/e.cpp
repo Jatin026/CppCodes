@@ -56,53 +56,53 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-const int N =1e6+7;
-int pref[N];
-vi prime(N,1);
 void solve(){
-    for (int p = 2; p * p <= N; p++)
+    int n,a,b ;
+    cin>>n>>a>>b ;
+    
+    vi x;
+    ll c=1;
+    int m=1;
+    while(c<n){
+        x.pb(c);
+        c=BinExpItr(b,m);
+        m++;
+    }
+    vi dpa(n+1,0);
+    dpa[0]=1;
+    for (int i = 0; i < n+1; i++)
     {
-        // If prime[p] is not changed,
-        // then it is a prime
-        if (prime[p] == 1)
+        if(i%a==0){
+        for (int j = 0; j < 9; j++)
         {
-            // Update all multiples
-            // of p greater than or
-            // equal to the square of it
-            // numbers which are multiple
-            // of p and are less than p^2
-            // are already been marked.
-            for (int i = p * p; i <= N; i += p)
-                prime[i] = 0;
+            if(i>=j+1) dpa[i]=(dpa[i]+dpa[i-j-1])%mod;
+        }  
         }
     }
-    pref[0]=0;
-    int n,k;
-    cin>>n>>k;
-    vi v(n);
-    for(auto &x : v){
-        cin>>x;
-    }
-    for (int i = 0; i < n; i++)
+    vi dpb(n+1,0);
+    dpb[0]=1;
+    for (int i = 0; i < n+1; i++)
     {
-        if(v[i]!=1) pref[i+1]=pref[i]+prime[v[i]];
-        else pref[i+1]=pref[i];
+        for (int j = 0; j < x.size(); j++)
+        {
+            if(i>=x[j]) dpb[i]=(dpb[i]+dpb[i-x[j]])%mod;
+        }   
     }
-    ll l=1 , ans=0;
-    for (int r = 1; r <= n ; r++)
+    ll ans=0;
+    for (int i = 0; i < n+1; i++)
     {
-        while(pref[r]-pref[l-1]>k){
-            l++;
+        if(i%a==0){ 
+            if(i==n) cout<<((dpa[i]*dpb[n-i])%mod)+1<<" ";
+            else  cout<<((dpa[i]*dpb[n-i])%mod)<<" ";
         }
-        ans+=(r-l+1);
+        else cout<<0<<" ";
     }
-    cout<<ans;
-
+    cout<<nline;
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

@@ -68,7 +68,7 @@ void solve(){
         }   
     }
     vector<lld> ans(n,0);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
       
         for (int j = 0; j < n ; j++)
@@ -84,7 +84,7 @@ void solve(){
         }
        
         for(auto x : ans){
-            cout<<deci(x,6)<<" ";
+            cout<<deci(x,5)<<" ";
         }
         cout<<nline;
     }

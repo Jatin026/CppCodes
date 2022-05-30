@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\Jatin\\C++ Codes\\Contest\\CodeChef\\Startes 39\\b.cpp","tests":[{"id":1652887534268,"input":"4\n5\naeiou\n5\nabcde\n8\nstarters\n8\ncodechef\n","output":"1\n2\n4\n4\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\CodeChef\\Startes 39\\b.cpp","group":"local","local":true}

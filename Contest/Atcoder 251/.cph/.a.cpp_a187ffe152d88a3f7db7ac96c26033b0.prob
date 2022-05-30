@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\Atcoder 251\\a.cpp","tests":[{"id":1652670996201,"input":"abc\n","output":"abcabc\n"},{"id":1652671008568,"input":"zz","output":"zzzzzz\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\Atcoder 251\\a.cpp","group":"local","local":true}

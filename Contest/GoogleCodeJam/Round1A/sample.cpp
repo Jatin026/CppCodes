@@ -56,6 +56,22 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
+struct range{
+    long double a,b;
+    public:
+        range(){
+        }
+        range(lld a , lld b){
+            this->a=a;
+            this->b=b;
+        }
+};
+range intersection(long double a , long double b, long double c , long double d){
+    range obj;
+    obj.b=min(max(a,b),max(c,d));
+    obj.a=max(min(a,b),min(c,d));
+    return obj;
+}
 void solve(){
     int n,l,r;
     cin>>n>>l>>r;
@@ -65,25 +81,32 @@ void solve(){
     }
     sort(all(v));
     ll ans=0;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n-1; i++)
     {
         int l1=i+1 ,r1=n-1;
-        while(l1+1<r1){
+        int ans1=INT_MAX,ans2=-1;
+        while(l1<=r1){
             int mid=(l1+r1)/2;
             if(v[i]+v[mid]>=l){
-                r1=mid;
+                r1=mid-1;
+                ans1=mid;
             }
-            else l1=mid;
+            else l1=mid+1;
         }
         int l2=i+1,r2=n-1;
-        while(l2+1<r2){
+        while(l2<=r2){
             int mid = (l2+r2)/2;
             if(v[i]+v[mid]<=r){
-                l2=mid;
+                l2=mid+1;
+                ans2=mid;
             }
-            else r2=mid;
+            else r2=mid-1;
+        } 
+        
+        if(ans2>=ans1 && ans2>=i+1 && ans1<=n-1){
+            range obj=intersection(i+1,ans2,ans1,n-1);
+            ans+=(obj.b-obj.a+1);
         }
-        if(r2<=l1 ) ans+=min(n-1,l1)-max(i,r2);
     }
     cout<<ans<<nline;
 }

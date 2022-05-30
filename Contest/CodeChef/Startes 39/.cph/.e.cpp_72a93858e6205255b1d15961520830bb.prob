@@ -1,0 +1,1 @@
+{"name":"Local: e","url":"d:\\Jatin\\C++ Codes\\Contest\\CodeChef\\Startes 39\\e.cpp","tests":[{"id":1652889564104,"input":"3\n4\naaaa\n4\nabca\n7\nbabbaab","output":"4 4 4 4 4\n1 2 2 2 2\n2 3 4 4 4 4 4 4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\CodeChef\\Startes 39\\e.cpp","group":"local","local":true}

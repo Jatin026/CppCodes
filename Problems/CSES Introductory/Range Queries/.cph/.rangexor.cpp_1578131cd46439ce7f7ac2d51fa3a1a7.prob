@@ -1,0 +1,1 @@
+{"name":"Local: rangexor","url":"d:\\Jatin\\C++ Codes\\Problems\\CSES Introductory\\Range Queries\\rangexor.cpp","tests":[{"id":1651959050330,"input":"3\n3 75\n100 100\n42 13\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\CSES Introductory\\Range Queries\\rangexor.cpp","group":"local","local":true}

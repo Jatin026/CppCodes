@@ -27,7 +27,6 @@ typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
 
-const int M = 1e9+7;
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -47,48 +46,30 @@ template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
 ll BinExpItr(ll a , ll b){
-    ll res=1;
-    while(b){
-        if(b&1){
-            res=(res*a)%M;
-        }
-        a=(a*a)%M;
-        b>>=1;
+  ll res=1;
+  while(b){
+    if(b&1){
+      res=(res*a)%mod;
     }
-    return res;
+    a=(a*a)%mod;
+    b>>=1;
+  }
+  return res;
 }
 void solve(){
-    vi fac;
-    int n,k;
-    cin>>n>>k;
-    int temp=k;
-    while(k-->1){
-    for (int i = 2; i < n; i++)
-    {
-        if(n%i==0){
-            fac.pb(i);
-            n=n/i;
-            break;
-        }
-
-    }
-    }
-    if(temp>fac.size()+1) cout<<-1;
-    else{
-    for (int i = 0; i < fac.size(); i++)
-    {
-        cout<<fac[i]<<" ";
-    }
-    cout<<n;
-    }
-
+  int a,b,c,d,e;
+  cin>>a>>b>>c>>d>>e;
+  d-=a;
+  e-=b;
+  if(max(d,0)+max(e,0)<=c) cout<<"YES\n";
+  else cout<<"NO\n";
 }
 int main(){
-    FAST
-    int t=1;
-    //cin>>t;
-    while(t--){
-        solve();
-    }
-    return 0;
+  FAST
+  int t=1;
+  cin>>t;
+  while(t--){
+    solve();
+  }
+  return 0;
 }

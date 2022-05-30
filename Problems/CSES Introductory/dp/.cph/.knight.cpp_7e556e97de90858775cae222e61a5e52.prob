@@ -1,0 +1,1 @@
+{"name":"Local: knight","url":"d:\\Jatin\\C++ Codes\\Problems\\CSES Introductory\\dp\\knight.cpp","tests":[{"id":1651075443027,"input":"3 2","output":"1"},{"id":1651075491407,"input":"31 34","output":"293930"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\CSES Introductory\\dp\\knight.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\CodeChef\\MayLunchtime\\a.cpp","tests":[{"id":1652625737975,"input":"3\n1 2 3 4 \n10 70 10 6 \n2 100 4 3 \n","output":"overFlow\nfilled\nUnfilled\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\CodeChef\\MayLunchtime\\a.cpp","group":"local","local":true}
