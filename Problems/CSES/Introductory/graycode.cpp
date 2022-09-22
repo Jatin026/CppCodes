@@ -56,36 +56,20 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-void print(string s , int n){
-    cout<<(s.substr(s.size()-n))<<nline;
-}
+ 
 void solve(){
     int n;
     cin>>n;
-    print(binarystring(31,0),n);
-    set<pr> v;
-    for (int i = 2; i < (1<<n); i++)
+    for (int i = 0; i < (1<<n); i++)
     {
-        v.insert({setbits(i),i});
-    }
-     
-    print(binarystring(31,1),n);
-    int prev_count=1;
-    for (int i = 2; i < (1<<n); i++)
-    {
-        if(i%2==0){
-            auto it = v.lower_bound({prev_count+1,0});
-            print(binarystring(31,(*(it)).second),n);
-            prev_count=(*(it)).first;
-            v.erase(it);
+        int t=((i)^(i>>1));
+        for(int j = n-1 ; j>=0 ; j--){
+            if((1<<j)&t) cout<<1;
+            else cout<<0;
         }
-        else{
-            auto it = v.lower_bound({prev_count-1,0});
-            print(binarystring(31,(*(it)).second),n);
-            prev_count=(*(it)).first;
-            v.erase(it);
-        }
+        cout<<nline;
     }
+    
     
 }
 int main(){

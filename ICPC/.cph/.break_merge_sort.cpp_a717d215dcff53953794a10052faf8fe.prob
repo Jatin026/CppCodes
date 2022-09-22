@@ -1,0 +1,1 @@
+{"name":"Local: break_merge_sort","url":"d:\\Jatin\\C++ Codes\\ICPC\\break_merge_sort.cpp","tests":[{"id":1662124729240,"input":"7\n","output":"4"},{"id":1662124734639,"input":"32\n","output":"32"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\ICPC\\break_merge_sort.cpp","group":"local","local":true}

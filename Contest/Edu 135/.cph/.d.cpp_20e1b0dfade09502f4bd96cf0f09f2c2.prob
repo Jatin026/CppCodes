@@ -1,0 +1,1 @@
+{"name":"Local: d","url":"d:\\Jatin\\C++ Codes\\Contest\\Edu 135\\d.cpp","tests":[{"id":1662707002367,"input":"5\n7\n?R???BR\n7\n???R???\n1\n?\n1\nB\n10\n?R??RB??B?","output":"BRRBRBR\nBRBRBRB\nB\nB\nBRRBRBBRBR"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\Edu 135\\d.cpp","group":"local","local":true}

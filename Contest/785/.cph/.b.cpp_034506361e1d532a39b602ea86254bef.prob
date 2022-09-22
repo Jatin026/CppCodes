@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\Jatin\\C++ Codes\\Contest\\785\\b.cpp","tests":[{"id":1658141463998,"input":"5\naba\nabb\nabc\naaaaa\nabcba\n","output":"YES\nNO\nYES\nYES\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\785\\b.cpp","group":"local","local":true}

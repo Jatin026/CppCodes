@@ -1,0 +1,1 @@
+{"name":"Local: compressionandexpansion","url":"d:\\Jatin\\C++ Codes\\Problems\\20\\compressionandexpansion.cpp","tests":[{"id":1660493392851,"input":"2\n4\n1\n1\n2\n3\n9\n1\n1\n1\n2\n2\n1\n2\n1\n2\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\20\\compressionandexpansion.cpp","group":"local","local":true}

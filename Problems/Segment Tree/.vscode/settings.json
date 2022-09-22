@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "valarray": "cpp",
+        "array": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "regex": "cpp",
+        "utility": "cpp",
+        "random": "cpp",
+        "ostream": "cpp",
+        "memory_resource": "cpp",
+        "scoped_allocator": "cpp"
+    }
+}

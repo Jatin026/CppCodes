@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\Codechef July Long\\a.cpp","tests":[{"id":1658488206478,"input":"4\n3\n1 0 1\n1\n0\n2\n1 1\n4\n1 1 0 1","output":"16\n0\n6\n120"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\Codechef July Long\\a.cpp","group":"local","local":true}

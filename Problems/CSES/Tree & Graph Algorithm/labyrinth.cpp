@@ -61,7 +61,7 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-
+int ai,aj,bi,bj;
 void solve(){
     int N,M;
     cin>>N>>M;
@@ -84,25 +84,71 @@ void solve(){
         
     }
     int cnt=0;
-
-  
-    int ans1=dfs(ai,aj,v,vis,N,M);
-    if(ans1>=1e7) cout<<"NO\n";
+    queue<pr> q;
+    q.push({ai,aj});
+ 
+    vis[ai][aj]=1;
+    bool flag=false;
+    vector<vpr> route(N+1,vpr(M+1,{-1,-1}));
+    while(!q.empty()){
+        int n = (q.front()).first;
+        int m = (q.front()).second;
+        q.pop();
+         
+        
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                if(abs(i)+abs(j)==1 && (n+i)>0 && (n+i)<= N && (m+j)>0 && (m+j)<= M && !vis[n+i][m+j] && v[n+i-1][j+m-1]!='#'){
+                    q.push({n+i,m+j});
+                    vis[n+i][j+m]=1;
+                    route[n+i][j+m]={n,m};
+                    pr x= {(n+i),m+j};
+                    if(n+i==bi && m+j==bj) {
+            flag=true;
+            break;
+        }
+                }
+            }
+        } 
+    }
+    if(!flag) cout<<"NO\n";
     else{
         cout<<"YES\n";
-        cout<<ans1<<nline;
-        for (int i = 0; i < N; i++)
-        {
-            fill(all(vis[i]),0);
+        vector<char> ans;
+ 
+        pr p = {-1,-1};
+        pr x = {route[bi][bj].first,route[bi][bj].second};
+        while(bi!=-1 && bj!=-1){
+            if(x.first==bi+1){
+                ans.pb('U');
+            }
+            if(x.first==bi-1){
+                ans.pb('D');
+            }
+            if(x.second==bj+1){
+                ans.pb('L');
+            }
+            if(x.second==bj-1){
+                ans.pb('R');
+            }
+
+  
+            bi=x.first;
+            bj=x.second;
+            if(bi==-1 && bj==-1) break;
+            x=route[bi][bj];
+            cnt++;
+          
         }
-        
-        int ans2=dfs2(bi,bj,v,vis,N,M,ans1);
-        reverse(all(ans));
-        for(auto x : ans){
-            cout<<x;
+   
+        cout<<cnt<<nline;
+        reverse(ans.begin(),ans.end());
+        for(auto x :  ans){
+            cout<<x ;
         }
     }
-    
 }
 int main(){
     FAST

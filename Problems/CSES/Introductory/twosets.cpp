@@ -58,17 +58,42 @@ ll BinExpItr(ll a , ll b){
     return res;
 }
 void solve(){
-    int n;
+    ll n;
     cin>>n;
     if(n*(n+1)%4!=0){
         cout<<"NO";
     }
     else{
-        for (int i = 1; i <= n ; i++)
+        cout<<"YES\n";
+        ll sum=n*(n+1)/4;
+        vi a , b;
+        int i;
+        for (i = n; i >=1 ; i--)
         {
-            /* code */
+            sum-=i;
+            a.pb(i);
+            if(sum<i && sum>0){
+                a.pb(sum);
+                break;
+            }
+            if(sum==0) break;
         }
-        
+        cout<<a.size()<<nline;
+        for(auto x : a){
+            cout<<x<<" ";
+        }
+        cout<<nline;
+      
+        for ( i = i-1; i > 0; i--)
+        {
+            b.pb(i);
+        }
+        if(find(all(b),sum)!=b.end()) b.erase(find(all(b),sum));
+        cout<<b.size()<<nline;
+        for(auto x : b){
+            if(x!=sum) cout<<x<<" ";
+        }
+        cout<<nline;
     }
 }
 int main(){

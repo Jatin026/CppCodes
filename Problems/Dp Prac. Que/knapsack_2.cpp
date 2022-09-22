@@ -45,6 +45,11 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
+template <class T, class V> void _print(pair <T, V> p) {cerr << '{'; _print(p.first); cerr << ','; _print(p.second); cerr << '}';}
+template <class T> void _print(vector <T> v) {cerr << '['; for (T i : v) {_print(i); cerr << ' ';} cerr << ']';}
+template <class T> void _print(set <T> v) {cerr << '['; for (T i : v) {_print(i); cerr << ' ';} cerr << ']';}
+template <class T> void _print(multiset <T> v) {cerr << '['; for (T i : v) {_print(i); cerr << ' ';} cerr << ']';}
+template <class T, class V> void _print(map <T, V> v) {cerr << '['; for (auto i : v) {_print(i); cerr << ' ';} cerr << ']';}
 ll BinExpItr(ll a , ll b){
     ll res=1;
     while(b){
@@ -56,24 +61,32 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-map<pr,int> dp;
-int rec(int n , int w, vi &weight,vi &cost){
-    if(n==0 || w==0) return 0;
-    if(dp.find({n,w})!=dp.end()) return dp[{n,w}];
-    int ans=rec(n-1,w,weight,cost);
-    if(weight[n-1]<=w) ans=max(ans,rec(n-1,w-weight[n-1],weight,cost)+cost[n-1]);
-    return dp[{n,w}]=ans;
-}
+const int N = 1e5+6;
+const int M = 1e2+3;
+vector<vll> dp(M,vll(N,1e12));
 void solve(){
-    int N,W;
-    cin>>N>>W;
-    vi weight(N),cost(N);
-    for (int i = 0; i < N; i++)
+    ll n,w;
+    cin>>n>>w;
+    dp[0][0]=0;
+    int ans=0;
+    for (int i = 0; i < n; i++)
     {
-        cin>>weight[i]>>cost[i];
-    }
-    cout<<rec(N,W,weight,cost);
+        ll v,wi;
+        cin>>wi>>v;
+        for (int val = 0; val < N-v; val++)
+        {
+            dp[i+1][val]=min(dp[i][val],dp[i+1][val]);
+            dp[i+1][val+v]=min(dp[i+1][val+v],dp[i][val]+wi);
 
+        } 
+        
+    }
+
+    for (int val = 0; val < N; val++)
+        {
+            if(dp[n][val]<=w) ans=val;
+        }
+    cout<<ans;
 }
 int main(){
     FAST

@@ -1,0 +1,1 @@
+{"name":"Local: sample","url":"d:\\Jatin\\C++ Codes\\BootCamp\\sample.cpp","tests":[{"id":1661929090639,"input":"1 21","output":"YES"},{"id":1661929096950,"input":"10 1","output":"NO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\BootCamp\\sample.cpp","group":"local","local":true}

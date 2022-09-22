@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\ICPC\\a.cpp","tests":[{"id":1658223208981,"input":"3\nM?U\nUU?\n???","output":"Yes\nNo\nNo"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\ICPC\\a.cpp","group":"local","local":true}

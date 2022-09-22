@@ -1,0 +1,1 @@
+{"name":"Local: d1","url":"d:\\Jatin\\C++ Codes\\Contest\\815\\d1.cpp","tests":[{"id":1660836810521,"input":"3\n2\n1 2\n5\n5 2 4 3 1\n10\n3 8 8 2 9 1 6 2 8 3\n","output":"2\n3\n6\n"},{"id":1660836908139,"input":"1\n2\n1 2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\815\\d1.cpp","group":"local","local":true}

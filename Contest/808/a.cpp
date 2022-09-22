@@ -62,7 +62,19 @@ ll BinExpItr(ll a , ll b){
     return res;
 }
 void solve(){
-    
+    int n;
+    cin>>n;
+    vi v(n);
+    bool flag=true;
+    for (int i = 0; i < n; i++)
+    {
+        cin>>v[i];
+        if(i>0){
+            if(v[i]%v[0]!=0) flag=false;
+        }
+    }
+    if(flag) cout<<"YES\n";
+    else cout<<"NO\n";
 }
 int main(){
     FAST

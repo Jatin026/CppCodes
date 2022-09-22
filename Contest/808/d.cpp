@@ -61,19 +61,41 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
-void rec(int x){
-    if(x<0) return;
-    --x;
-     rec(x);
-    debug(x)
-}
+ 
 void solve(){
-    rec(5);
+    int n;
+    cin>>n;
+    vi v(n);
+    for(auto &x : v){
+        cin>>x;
+    }
+   
+    for (int i = 0; i < n-1; i++)
+    {
+        set<int> b;
+        for (int j = 0; j < v.size()-1; j++)
+        {
+            b.insert(v[j+1]-v[j]);  
+        }
+      
+        v.resize(b.size());
+        int l=0;
+        for(auto x : b){
+            v[l]=x;
+            l++;
+        
+        }
+        if(b.size()==1) break;
+        debug(b)
+    }
+    for(auto x : v){
+        cout<<x<<" \n";
+    }
 }
 int main(){
     FAST
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }

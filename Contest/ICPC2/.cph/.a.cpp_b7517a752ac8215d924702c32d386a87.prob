@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\ICPC2\\a.cpp","tests":[{"id":1662308862008,"input":"3\n4\ncbac\n5 20 10 0\n5\nsadge\n-1 -1 -1 -1 -1\n5\nbcabc\n-10 8 4 15 0","output":"25\n0\n15"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\ICPC2\\a.cpp","group":"local","local":true}
