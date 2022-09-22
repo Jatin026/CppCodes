@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\Jatin\\C++ Codes\\AtCoder\\253\\b.cpp","tests":[{"id":1654274319579,"input":"2 3\n--o\no--\n","output":"3"},{"id":1654274333305,"input":"5 4\n-o--\n----\n----\n----\n-o--\n","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\AtCoder\\253\\b.cpp","group":"local","local":true}

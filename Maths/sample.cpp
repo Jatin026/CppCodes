@@ -56,26 +56,51 @@ ll BinExpItr(ll a , ll b){
     }
     return res;
 }
+vi isPrime(1e6+4,1);
 void solve(){
+    isPrime[1]=0;
     int n;
     cin>>n;
-    map<int,int> m;
-    for (int i = 0; i < n; i++)
+    int temp = n;
+    for (int i = 2; i <= n ; i++)
     {
-        int a,b;
-        cin>>a>>b ;
-        m[a]++;
-        m[b]--;
+        for (int j = 2*i; j <= n; j+=i)
+        {
+            isPrime[j]=0;   
+        } 
     }
-    ll ans = -1 , sum=0 , yr=-1;
-    for(auto x : m){
-        sum+=x.second;
-        if(sum>ans){
-            yr=x.first;
-            ans=sum;
+    int val = 0 , ans=1;
+    bool flag=false;
+    for (int i = 2 ; i <= n; i++)
+    {
+        if(isPrime[i] && n%i==0){
+            int cnt=0;
+            ans*=i;
+            while(n%i==0){
+                n/=i;
+                cnt++;
+            }
+            if(val!=0 && cnt!=val) flag=true; 
+            val=max(cnt,val);
+
+        } 
+    }
+    if(ans==temp){
+        cout<<ans<<" 0";
+        return;
+    }
+    int j =0;
+    for (int i = 1; i < 32; i++)
+    {
+        if((1<<i)>=val){
+            
+            j=i;
+            if((1<<i)>val) flag=true;
+            break;
         }
     }
-    cout<<yr<<" "<<ans;
+    
+    cout<<ans<<" "<<j+(flag ? 1 : 0);
 }
 int main(){
     FAST

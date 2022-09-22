@@ -1,0 +1,1 @@
+{"name":"Local: b1","url":"d:\\Jatin\\C++ Codes\\OCS\\OCS Graph\\b1.cpp","tests":[{"id":1657468850936,"input":"6\nlollipops\nstringology\nabracadabra\ncodeforces\ntest\nf","output":"2\n4\n3\n4\n1\n1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\OCS\\OCS Graph\\b1.cpp","group":"local","local":true}

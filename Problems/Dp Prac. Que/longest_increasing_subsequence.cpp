@@ -13,6 +13,8 @@ int lis(int n){
     }
     return dp[n]=ans;
 }
+
+ 
 int main(){
     int n,ans=1;
     cin>>n;

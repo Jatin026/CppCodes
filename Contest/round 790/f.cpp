@@ -60,29 +60,44 @@ void solve(){
     int n,k;
     cin>>n>>k;
     vi v(n);
+    map<int,int> m;
     for(auto &x : v){
         cin>>x;
+        m[x]++;
     }
-    map<int,int> m;
-    set<int> s;
-    int l=0;
-    int ans=INT_MIN;
-    for (int r = 0; r < n; r++)
-    {
-        m[v[l]]++;
-        s.insert(v[l]);
-        while(l<=r && s.size()!=0){
-            if(m[v[l]]<k){
-                m[v[l]]--;
-                l++;
-            }
-            else{
-
-            }
-            
+    vi a;
+    for(auto x  : m){
+        if(x.second>=k){
+            a.pb(x.first);
         }
     }
-    
+    if(a.size()==0){
+        cout<<-1<<nline;
+        return;
+    }
+    int ans=-1,cnt=1,r=-1;
+    for (int i = 0; i < a.size()-1; i++)
+    {
+       if(a[i]+1==a[i+1]){
+           cnt++;
+       } 
+       else{
+           if(cnt>ans){
+                r=a[i];
+                ans=cnt ;
+           }
+           cnt=1;
+       }
+    }
+    if(cnt>ans){
+               
+               r=a[a.size()-1];
+                ans=cnt ;
+                cnt=1;
+               
+           }
+    if(r==-1) cout<<-1<<nline;
+    else cout<<r-ans+1<<" "<<r<<nline;
     
 }
 int main(){

@@ -1,0 +1,1 @@
+{"name":"Local: A-B_knapsack","url":"d:\\Jatin\\C++ Codes\\Problems\\Two Pointers\\step3\\A-B_knapsack.cpp","tests":[{"id":1653999548478,"input":"6 7 23 3 5\n7 4 3 1 5 8\n10 12 7 3 8 9 7","output":"47"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Problems\\Two Pointers\\step3\\A-B_knapsack.cpp","group":"local","local":true}
