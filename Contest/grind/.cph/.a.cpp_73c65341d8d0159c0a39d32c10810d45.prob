@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\grind\\a.cpp","tests":[{"id":1686813869508,"input":"5\nabacaba\ncodeforces\noooooooo\nabcdef\nmewheniseearulhiiarul","output":"1\n3\n0\n2\n4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\grind\\a.cpp","group":"local","local":true}

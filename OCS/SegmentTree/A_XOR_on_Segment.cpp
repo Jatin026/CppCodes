@@ -103,27 +103,77 @@ friend std::istream &operator >> (std::istream &input, Mint &M) { input >> M.val
 struct segtree{
     int size;
     vll operations;
-    vi len;
-    vector<vll> sums;
+    vll sums;
+    ll NO_OPERATIONS = LLONG_MAX;
+    ll Neutral_Element= 0; 
     void init(int n){
         size=1;
         while(size<n){
             size*=2;
         }
-        sums.assign(2*size,vll(23,0));
+        sums.assign(2*size,0);
         operations.assign(2*size,0);
-        len.assign(2*size,0);
+    }
+    ll modify_Op(ll a , ll b , ll len){
+        if(b ==  NO_OPERATIONS) return a;
+        if(a== NO_OPERATIONS) return b;
+        if(b==1) return (len-a);
+        else return a;
+       
+    }
+    void apply_mod_op(ll &a , ll b , ll len){
+        a=modify_Op(a,b,len);
+    }
+    ll calc_Op(ll a , ll b){
+        return a+b ;
+    }
+    void propagate(int x , int lx ,int rx){
+        if(rx - lx == 1) return;
+        int m = (lx + rx )/2;
+ 
+        apply_mod_op(sums[2*x+1], operations[x]  , m -lx);
+        apply_mod_op(sums[2*x+2] , operations[x] , rx -m );
+        apply_mod_op(operations[2*x+2] , operations[x] , 1 );
+        apply_mod_op(operations[2*x+1] , operations[x] , 1  );
+        operations[x]=NO_OPERATIONS;
+ 
+    }
+    void modify (int l , int r , int v, int x , int lx , int rx){
+        propagate(x , lx , rx );
+        if(lx>=r || l>=rx) return ;
+        if(lx >= l && rx <= r){
+            apply_mod_op(operations[x] , v , 1 ) ;
+            apply_mod_op(sums[x] ,  v , rx-lx) ;
+            return;
+        }
+        int m  = (lx+rx)/2;
+        modify(l,r,v,2*x+1,lx,m);modify(l,r,v,2*x+2,m,rx);
+        sums[x]=calc_Op(sums[2*x+1], sums[2*x+2] );
+        apply_mod_op(sums[x], operations[x],rx-lx);
+    }
+    void modify (int l ,int r , int v){
+        modify(l , r , v , 0 , 0 , size);
+    }
+    ll calc(int l ,int r , int x , int lx ,int rx){
+        propagate(x,lx,rx);
+        if(lx>=r || rx<=l) return Neutral_Element;
+        if(lx>=l && rx<=r){
+            return sums[x];
+        }
+        int m = (lx+rx)/2;
+        auto m1 = calc(l,r,2*x+1, lx , m);
+        auto m2 = calc(l,r, 2*x+2 , m , rx);
+        auto res = calc_Op(m1,m2);
+        apply_mod_op(res, operations[x], min(r,rx) -  max(lx ,l));
+        return res;
+    }
+    ll calc (int l , int r ){
+        return calc(l,r , 0 , 0 ,size);
     }
     void build(vector<ll> &a,int x , int lx , int rx){
         if(rx-lx==1){
             if(lx<(int)a.size()){
-                for (int i = 0; i < 22; i++)
-                {
-                    if((1<<i)&a[lx]){
-                        sums[x][i]=1;
-                    }
-                }
-                len[x]=1;
+                sums[x]=a[lx];
             }
             return;
         }
@@ -131,112 +181,50 @@ struct segtree{
             int m = (lx+rx)/2;
             build(a,2*x+1,lx,m);
             build(a,2*x+2,m,rx);
-            for (int i = 0; i < 22; i++)
-            {
-                sums[x][i]=sums[2*x+1][i]+sums[2*x+2][i];
-            }
-            len[x]=len[2*x+1]+len[2*x+2];
         }
-        
-        
-    }
-    void add(int l , int r , int v , int x , int lx , int rx){
-        if(lx>=r || l>=rx) return ;
-        if(lx>=l && rx<=r){
-            operations[x]=0;
-            for (int i = 0; i < 22; i++)
-            {
-                if((v&(1<<i))){
-                    sums[x][i]=(len[x]-sums[x][i]);
-                }
-            }
-            return;
-        }
-        int m =(lx+rx)/2;
-        add(l,r,v,2*x+1,lx,m);
-        add(l,r,v,2*x+2,m,rx);
-        for (int i = 0; i < 22; i++)
-        {
-            sums[x][i]=sums[2*x+1][i]+sums[2*x+2][i];
-            if((operations[x]&(1<<i))){
-                sums[x][i]=(len[x]-sums[x][i]);
-            }
-        }
-    }
-    void add(int l ,int r , int v){
-        add(l,r,v,0,0,size);
-    }
-    vll min(int l ,int r , int x , int lx ,int rx){
-        vll y(22,-1e9);
-        if(lx>=r || l>=rx) return y;
-        if(lx>=l && rx<=r){
-          
-            return sums[x];
-        }
-        int m =(lx+rx)/2;
-        vll m1= min(l,r,2*x+1,lx,m);
-        vll m2 =min(l,r,2*x+2,m,rx);
-        if(m1==y && m2==y){
-            return y;
-        }
-        else if(m1!=y && m2!=y){
-            fill(all(y),0);
-            for (int i = 0; i < 22; i++)
-            {
-                y[i]=m1[i]+m2[i];
-                if((operations[x]&(1<<i))){
-                    y[i]=(len[x]-y[i]);
-                }
-            }
-            return y;
-        }
-        else{
-            if(m1==y){
-                fill(all(y),0);
-                for (int i = 0; i < 22; i++)
-                {
-                    y[i]=m2[i];
-                    if((operations[x]&(1<<i))){
-                        y[i]=(len[2*x+2]-y[i]);
-                }
-                }
-            }
-            else{
-                fill(all(y),0);
-                for (int i = 0; i < 22; i++)
-                {
-
-                    y[i]=m1[i];
-                    if((operations[x]&(1<<i))){
-                        y[i]=(len[2*x+1]-y[i]);
-                }
-                }
-
-            }
-            debug(operations)
-            debug(y)
-            return y;
-        }
-    }
-    ll min(int l ,int r){
-        vll y = min(l,r,0,0,size);
-        vll x(22,-1e9);
-        if(x==y) return 0;
-        ll ans=0;
-        for (int i = 0; i < 22; i++)
-        {
-            ans+=y[i]*(ll)(1ll<<i);
-        }
-        return ans;
+        sums[x]=calc_Op(sums[2*x+1],sums[2*x+2]);
     }
     void build(vector<ll> &a){
         build(a,0,0,size);
     }
-    
+    ll find (int l , int r , ll val ,int x ,int lx ,int rx){
+        if(l>=rx || r<=lx) return NO_OPERATIONS;
+        debug(val)
+        debug(lx) debug(rx)
+        if(l<=lx && rx<=r){
+            if(rx-lx == 1 ){
+                if(val==1 && calc(lx,rx)==1) return lx;
+                else return NO_OPERATIONS;
+            }
+            int m = (lx+rx)/2;
+            ll m1 = calc(lx,m);
+            ll m2 = calc(m,rx);
+                 
+            if(m1>=val){
+                return find(l,r,val,2*x+1,lx,m);
+            }
+            else{
+                return find(l,r,val-m1,2*x+2,m,rx);
+            }
+        }
+        int m = (lx+rx)/2;
+        ll ans=LLONG_MAX;
+        if(calc(lx,m)>=val){
+            ans=min(ans,find(l,r,val,2*x+1, lx ,m));
+            if(ans!=LLONG_MAX) return ans;
+        }
+        ans=min(ans,find(l,r,val-calc(lx,m),2*x+2, m ,rx));
+        return ans;
+        
+    }
+    ll find(int x , int l , int r){
+        if(calc(l,r)<x) return -1;
+        return find(l , r , x, 0 , 0 , size);
+         
+    }
     
      
 };
- 
 
 ll BinExpItr(ll a , ll b){
     ll res=1;
@@ -254,9 +242,23 @@ ll BinExpItr(ll a , ll b){
 void solve(){
     int n;cin>>n;
     vll v(n); for(auto &x : v) cin>>x;
-    segtree st;
-    st.init(n);
-    st.build(v);
+    segtree st[22];
+    for (int i = 0; i < 22; i++)
+    {
+        st[i].init(n);
+    }
+    vector<vll> bin(22);
+    for (int i = 0; i < 22; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if((1<<i)&v[j]) bin[i].pb(1);
+            else bin[i].pb(0);
+        }
+        st[i].build(bin[i]);
+    }
+    
+     
     int m;cin>>m;
  
     while (m--)
@@ -266,13 +268,23 @@ void solve(){
         cin>>l>>r;
         --l;
         if(q==1){
-            cout<<st.min(l,r)<<nline;
+            ll ans=0;
+            for (int i = 0; i < 22; i++)
+            {
+                ans+=(st[i].calc(l,r))*(1ll<<i);
+            }
+            cout<<ans<<nline;
         }
         else{
             int val;cin>>val;
-            st.add(l,r,val);
+            for (int i = 0; i < 22; i++)
+            {
+                if((1<<i)&val) st[i].modify(l,r,1);
+            }
+            
+             
         }
-        debug(nline)
+        
     }
     
     

@@ -71,6 +71,7 @@ ll cnt(ll x, vector<ll> &v){
     }
     return dp[x]=ans;
 }
+ 
 void solve(){
     ll n,k;
     cin>>n>>k;

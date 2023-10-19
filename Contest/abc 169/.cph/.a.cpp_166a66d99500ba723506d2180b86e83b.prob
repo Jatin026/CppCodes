@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\Jatin\\C++ Codes\\Contest\\abc 169\\a.cpp","tests":[{"id":1675969500099,"input":"3\n101 9901 999999000001\n","output":""},{"id":1675969597808,"input":"198 1.10\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\abc 169\\a.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: s","url":"/mnt/d/Jatin/C++ Codes/Contest/550/s.cpp","tests":[{"id":1690192514494,"input":"6\n1 2 3 4 4 2\n1 2\n1 3\n3 4\n3 5\n2 6\n2\n5 4 1\n1 6 2","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/mnt/d/Jatin/C++ Codes/Contest/550/s.cpp","group":"local","local":true}

@@ -1,4 +1,6 @@
 #include<bits/stdc++.h>
+ 
+ #pragma comment(linker, "/STACK:268435456");
 #define FAST ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define all(s) s.begin(),s.end()
 #define gcd            __gcd
@@ -51,6 +53,19 @@ template <class T> void _print(vector <T> v) {cerr << '['; for (T i : v) {_print
 template <class T> void _print(set <T> v) {cerr << '['; for (T i : v) {_print(i); cerr << ' ';} cerr << ']';}
 template <class T> void _print(multiset <T> v) {cerr << '['; for (T i : v) {_print(i); cerr << ' ';} cerr << ']';}
 template <class T, class V> void _print(map <T, V> v) {cerr << '['; for (auto i : v) {_print(i); cerr << ' ';} cerr << ']';}
+ll BinExpItr(ll a , ll b){
+    ll res=1;
+    while(b){
+        if(b&1){
+            res=(res*a)%mod;
+        }
+        a=(a*a)%mod;
+        b>>=1;
+    }
+    return res;
+}
+
+
 class Mint
 {
 //WARNING:
@@ -98,51 +113,196 @@ template<typename T>
 friend Mint operator ^(T other, const Mint &M){	return Mint(other) ^ M; }
 friend std::ostream &operator << (std::ostream &output, const Mint &M){  return output << M.val; }
 friend std::istream &operator >> (std::istream &input, Mint &M) { input >> M.val;	M.val %= MOD;	return input;}};
-
-
-
-
-ll BinExpItr(ll a , ll b){
-    ll res=1;
-    while(b){
-        if(b&1){
-            res=(res*a)%mod;
-        }
-        a=(a*a)%mod;
-        b>>=1;
-    }
-    return res;
-}
-
-
-void solve(){
-    int n,k,t;
-    cin>>n>>t>>k;
-    int ans=1;
-    int l=1,r=n;
-    while (l<=r)
-    {
-        int mid = (l+r)/2;
-        cout<<"? "<<1<<" "<<mid<<endl;
-        int ele;cin>>ele;
-        if(mid-ele>k){
-            r=mid-1;
-        }
-        else if(mid-ele==k){
-            ans=mid;
-            r=mid-1;
-        }
-        else l=mid+1;
-    }
  
-    cout<<"! "<<ans<<endl;
-     
-    
+ifstream in("Input.txt");
+ofstream out("Output2.txt");
+void Case(){
+    static int c=1;
+    out<<"Case #"<<c<<": ";
+    c++;
+}
+struct segtree{
+    int size;
+    vvi sums;
+   
+    void init(int n){
+        size=1;
+        while(size<n){
+            size*=2;
+        }
+      
+        sums.resize(2*size,vi(4,0));
+    }
+    void build(vector<int> &a,int x , int lx , int rx){
+        if(rx-lx==1){
+            if(lx<(int)a.size()){
+                sums[x][a[lx]]=1;
+                for (int i = 0; i < 4; i++)
+            {
+                if(i!=a[lx]) sums[x][i]=0;
+            }
+            
+            }
+            return;
+        }
+        else{
+            int m = (lx+rx)/2;
+            build(a,2*x+1,lx,m);
+            build(a,2*x+2,m,rx);
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            sums[x][i]=sums[2*x+1][i]+sums[2*x+2][i];
+        }
+        
+    }
+    void build(vector<int> &a){
+        build(a,0,0,size);
+    }
+    void set(int i , int v , int x , int lx, int rx){
+        if(rx-lx==1){
+            sums[x][v]=1;
+            for (int i = 0; i < 4; i++)
+            {
+                if(i!=v) sums[x][i]=0;
+            }
+             
+            return;
+        }
+        int m = (lx+rx)/2;
+        if(i<m){
+            set(i,v,2*x+1,lx,m);
+        }
+        else{
+            set(i,v,2*x+2,m,rx);
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            sums[x][i]=sums[2*x+1][i]+sums[2*x+2][i];
+        }
+    }
+    void set(int i , int v){
+        set(i,v,0,0,size);
+    }
+    vi sum(int l , int r, int x , int lx , int rx){
+        vi y(4,0);
+        if(l>=rx || lx>=r) return y;
+        if(l<=lx && r>=rx){
+             
+            return sums[x];
+        }
+         
+        int m = (lx+rx)/2;
+        vi s1=sum(l,r,2*x+1,lx,m);
+        vi s2=sum(l,r,2*x+2,m,rx);
+       
+        for (int i = 0; i < 4; i++)
+        {
+                s1[i]=s1[i]+s2[i];
+        }
+        return s1;
+    }
+    vi sum(int l , int r){
+        return sum(l,r,0,0,size);
+    }
+};
+void solve(){ 
+    int n,m;in>>n>>m;
+    vi c(n); for(auto &x : c) in>>x;
+    segtree st;
+    st.init(n);
+    st.build(c);
+    ll ans=0;
+    while (m--)
+    {
+        int x,y,z; in>>x>>y>>z;
+        --x;
+        st.set(x,y);
+        vi a = st.sum(0,z), b = st.sum(z,n);
+        int s1=0,s2=0;
+        for (int i = 0; i < 4; i++)
+        {
+            s1+=i*a[i]; s2+=i*b[i];    
+        }
+        int ops=0;
+        if(s1==s2) continue;
+        else if(s1>s2){
+            int dif=s1-s2;
+            if(dif >= min(a[3],b[1])*4){
+                dif-=min(a[3],b[1])*4;
+                ops+=min(a[3],b[1]);
+                int o = min(a[3],b[1]);
+                a[3]-=o;b[1]-=o;
+            }
+            if(dif==0){
+                 ans+=ops;
+                 continue;
+            }
+            if(dif>=min(a[3],b[2])*2){
+                dif-=min(a[3],b[2])*2;
+                ops+=min(a[3],b[2]);
+                int o = min(a[3],b[2]);
+                a[3]-=o;b[2]-=o;
+            }
+            if(dif==0){
+                 ans+=ops;
+                 continue;
+            }
+            if(dif>=min(a[2],b[1])*2){
+                dif-=min(a[2],b[1])*2;
+                ops+=min(a[2],b[1]);
+                int o = min(a[2],b[1]);
+                a[2]-=o;b[1]-=o;
+            }
+            if(dif==0){
+                 ans+=ops;
+                 continue;
+            }
+            else ans+=(-1);
+        }
+        else {
+            swap(s1,s2);
+            swap(a,b);
+            int dif=s1-s2;
+            if(dif >= min(a[3],b[1])*4){
+                dif-=min(a[3],b[1])*4;
+                ops+=min(a[3],b[1]);
+                int o = min(a[3],b[1]);
+                a[3]-=o;b[1]-=o;
+            }
+            if(dif==0){
+                 ans+=ops;
+                 continue;
+            }
+            if(dif>=min(a[3],b[2])*2){
+                dif-=min(a[3],b[2])*2;
+                ops+=min(a[3],b[2]);
+                int o = min(a[3],b[2]);
+                a[3]-=o;b[2]-=o;
+            }
+            if(dif==0){
+                 ans+=ops;
+                 continue;
+            }
+            if(dif>=min(a[2],b[1])*2){
+                dif-=min(a[2],b[1])*2;
+                ops+=min(a[2],b[1]);
+                int o = min(a[2],b[1]);
+                a[2]-=o;b[1]-=o;
+            }
+            if(dif==0){
+                 ans+=ops;
+                 continue;
+            }
+            else ans+=(-1);
+        }
+    }
+    Case();
+    out<<ans<<nline;
 }
 int main(){
-    //FAST
     int t=1;
-    //cin>>t;
+    in>>t;
     while(t--){
         solve();
     }

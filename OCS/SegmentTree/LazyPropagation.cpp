@@ -27,7 +27,6 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
 using namespace std;
-
 #define nline '\n'
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<' '; _print(x); cerr << endl;
@@ -115,8 +114,8 @@ ll BinExpItr(ll a , ll b){
 }
 struct segtree{
     int size;
-    vector<Mint> operations;
-    vector<Mint> sums;
+    vll operations;
+    vll sums;
     ll NO_OPERATIONS = LLONG_MAX;
     ll Neutral_Element= 0; 
     void init(int n){
@@ -124,30 +123,32 @@ struct segtree{
         while(size<n){
             size*=2;
         }
-        sums.assign(2*size,1);
+        sums.assign(2*size,0);
         operations.assign(2*size,0);
     }
-    Mint modify_Op( Mint a , Mint b , Mint len){
+    ll modify_Op(ll a , ll b , ll len){
         if(b ==  NO_OPERATIONS) return a;
-        if(a ==  NO_OPERATIONS) return BinExpItr((ll)b,(ll)len);
-        return a*BinExpItr((ll)b,(ll)len);
+        if(a== NO_OPERATIONS) return b;
+        if(b==1) return (len-a);
+        else return a;
+       
     }
-    void apply_mod_op(Mint &a , Mint b , Mint len){
+    void apply_mod_op(ll &a , ll b , ll len){
         a=modify_Op(a,b,len);
     }
-    Mint calc_Op(Mint a , Mint b){
+    ll calc_Op(ll a , ll b){
         return a+b ;
     }
     void propagate(int x , int lx ,int rx){
         if(rx - lx == 1) return;
         int m = (lx + rx )/2;
-
+ 
         apply_mod_op(sums[2*x+1], operations[x]  , m -lx);
         apply_mod_op(sums[2*x+2] , operations[x] , rx -m );
         apply_mod_op(operations[2*x+2] , operations[x] , 1 );
         apply_mod_op(operations[2*x+1] , operations[x] , 1  );
         operations[x]=NO_OPERATIONS;
-
+ 
     }
     void modify (int l , int r , int v, int x , int lx , int rx){
         propagate(x , lx , rx );
@@ -165,7 +166,7 @@ struct segtree{
     void modify (int l ,int r , int v){
         modify(l , r , v , 0 , 0 , size);
     }
-    Mint calc(int l ,int r , int x , int lx ,int rx){
+    ll calc(int l ,int r , int x , int lx ,int rx){
         propagate(x,lx,rx);
         if(lx>=r || rx<=l) return Neutral_Element;
         if(lx>=l && rx<=r){
@@ -178,7 +179,7 @@ struct segtree{
         apply_mod_op(res, operations[x], min(r,rx) -  max(lx ,l));
         return res;
     }
-    Mint calc (int l , int r ){
+    ll calc (int l , int r ){
         return calc(l,r , 0 , 0 ,size);
     }
     void build(vector<ll> &a,int x , int lx , int rx){
@@ -195,59 +196,67 @@ struct segtree{
         }
         sums[x]=calc_Op(sums[2*x+1],sums[2*x+2]);
     }
-    // void add(int l , int r , int v , int x , int lx , int rx){
-    //     if(lx>=r || l>=rx) return ;
-    //     if(lx>=l && rx<=r){
-    //         operations[x]+=v;
-    //         mins[x]+=v;
-    //         return;
-    //     }
-    //     int m =(lx+rx)/2;
-    //     add(l,r,v,2*x+1,lx,m);
-    //     add(l,r,v,2*x+2,m,rx);
-    //     mins[x]=std::min(mins[2*x+1],mins[2*x+2])+operations[x];
-    // }
-    // void add(int l ,int r , int v){
-    //     add(l,r,v,0,0,size);
-    // }
-    // ll min(int l ,int r , int x , int lx ,int rx){
-    //     if(lx>=r || l>=rx) return LLONG_MAX;
-    //     if(lx>=l && rx<=r){
-    //         return mins[x];
-    //     }
-    //     int m =(lx+rx)/2;
-    //     ll m1= min(l,r,2*x+1,lx,m);
-    //     ll m2 =min(l,r,2*x+2,m,rx);
-    //     return std::min(m1,m2)+operations[x];
-
-    // }
-    // ll min(int l ,int r){
-    //     return min(l,r,0,0,size);
-    // }
     void build(vector<ll> &a){
         build(a,0,0,size);
     }
-    
+    ll find (int l , int r , ll val ,int x ,int lx ,int rx){
+        if(l>=rx || r<=lx) return NO_OPERATIONS;
+        debug(val)
+        debug(lx) debug(rx)
+        if(l<=lx && rx<=r){
+            if(rx-lx == 1 ){
+                if(val==1 && calc(lx,rx)==1) return lx;
+                else return NO_OPERATIONS;
+            }
+            int m = (lx+rx)/2;
+            ll m1 = calc(lx,m);
+            ll m2 = calc(m,rx);
+                 
+            if(m1>=val){
+                return find(l,r,val,2*x+1,lx,m);
+            }
+            else{
+                return find(l,r,val-m1,2*x+2,m,rx);
+            }
+        }
+        int m = (lx+rx)/2;
+        ll ans=LLONG_MAX;
+        if(calc(lx,m)>=val){
+            ans=min(ans,find(l,r,val,2*x+1, lx ,m));
+            if(ans!=LLONG_MAX) return ans;
+        }
+        ans=min(ans,find(l,r,val-calc(lx,m),2*x+2, m ,rx));
+        return ans;
+        
+    }
+    ll find(int x , int l , int r){
+        if(calc(l,r)<x) return -1;
+        return find(l , r , x, 0 , 0 , size);
+         
+    }
     
      
 };
- 
 
 void solve(){
     int n,m;cin>>n>>m;
     segtree st;
     st.init(n);
+  
     while (m--)
     {
         int type;cin>>type;
+        debug(st.calc(0,n))
         if(type == 1){
-            int l,r,v;
-            cin>>l>>r>>v;
-            st.modify(l,r,v);
+            ll l,r,v;
+            cin>>l>>r;
+             
+            st.modify(l,r,1);
         }
         else{
-            int l,r;cin>>l>>r;
-            cout<<st.calc(l,r)<<nline;
+            int l,x;cin>>x;
+            
+            cout<<st.find(x+1,0,n)<<nline;
         }
     }
     

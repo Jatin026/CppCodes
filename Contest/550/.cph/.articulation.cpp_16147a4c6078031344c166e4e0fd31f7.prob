@@ -1,0 +1,1 @@
+{"name":"Local: articulation","url":"/mnt/d/Jatin/C++ Codes/Contest/550/articulation.cpp","tests":[{"id":1690237140663,"input":"1\n6 7\n4 3 7 5 9 2\n1 2\n2 3\n1 3\n3 4\n4 5\n5 6\n4 6","output":"11 14"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/mnt/d/Jatin/C++ Codes/Contest/550/articulation.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: h","url":"d:\\Jatin\\C++ Codes\\Contest\\Vjudge\\h.cpp","tests":[{"id":1672589074895,"input":"5\n1 3 2 5 4","output":"3 4"},{"id":1672589099508,"input":"5\n1 2 5 3 3","output":"3 3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Jatin\\C++ Codes\\Contest\\Vjudge\\h.cpp","group":"local","local":true}
